@@ -1,8 +1,8 @@
 {
-  "name": "Start on Heroku: Node.js",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-getting-started",
-  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/main/public/node.svg",
+  "name": "Eevee",
+  "description": "Personal tools for various things (Eve Online is the name origin)",
+  "repository": "https://github.com/Ilandria/Eevee",
+  "logo": "https://drive.google.com/thumbnail?id=1N7piUsTazQ2VY1xhH1QSl8MWpXMHWOw0",
   "keywords": ["node", "express", "heroku"],
   "image": "heroku/nodejs"
 }
