@@ -1,9 +1,9 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.3.0",
-  "description": "A sample Node.js app using Express 4",
+  "name": "eevee",
+  "version": "0.1.0",
+  "description": "Tools for various games, name inspired by Eve Online",
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "main": "index.js",
   "scripts": {
@@ -19,12 +19,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/Ilandria/Eevee"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "license": "MIT"
+  "license": ""
 }
