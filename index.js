@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-const coolAscii = require('cool-ascii-faces')
+const coolAscii = require('cool-ascii-faces');
 
 const PORT = process.env.PORT || 5001
 
@@ -9,5 +9,5 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .get('/cool', (req, res) => res.send(coolAscii()))
+  .get('/ahoy', (req, res) => res.send(coolAscii()))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
