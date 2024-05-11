@@ -7,6 +7,8 @@
   },
   "main": "index.js",
   "scripts": {
+	"local": "heroku local web --port 5001",
+	"deploy": "git push eevee-heroku main",
     "start": "node index.js",
     "test": "node test.js"
   },
