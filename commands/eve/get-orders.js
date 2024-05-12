@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { get } = require('../../web-requests.js');
 
+
+
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('get-orders')
