@@ -13,6 +13,6 @@ module.exports = {
 		const type = interaction.options.getInteger('type');
 
 		const result = await get(`https://esi.evetech.net/markets/${region}/orders/?type_id=${type}`)
-		await interaction.reply(`${result}`);
+		await interaction.reply(`${JSON.stringify(result)}`);
 	}
 };
