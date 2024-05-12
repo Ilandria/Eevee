@@ -3,7 +3,7 @@ const express = require('express');
 const fs = require('node:fs');
 const path = require('node:path');
 const coolAscii = require('cool-ascii-faces');
-const DiscordClient = require('discord-client.js');
+const DiscordClient = require('./discord-client.js');
 
 const PORT = process.env.PORT || 5001
 
