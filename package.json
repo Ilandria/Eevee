@@ -10,7 +10,8 @@
     "local-frontend": "heroku local web --port 5001",
     "deploy-heroku": "git push eevee-heroku main",
     "start": "node index.js",
-	"deploy-discord": "node deploy-commands.js"
+	"deploy-discord": "node deploy-commands.js",
+	"logs": "heroku logs --tail"
   },
   "dependencies": {
     "cool-ascii-faces": "^1.3.4",
