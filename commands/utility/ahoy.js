@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const coolAscii = require('cool-ascii-faces');
 
-const commandBuffer = new SlashCommandBuilder()
+const config = new SlashCommandBuilder()
 .setName('ahoy')
 .setDescription('Replies with a probably-friendly greeting!');
 
@@ -11,6 +11,6 @@ async function execute(interaction)
 }
 
 module.exports = {
-	data: commandBuffer,
+	config,
 	execute
 };
