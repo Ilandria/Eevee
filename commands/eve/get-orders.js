@@ -12,7 +12,7 @@ module.exports = {
 		const region = interaction.options.getString('region');
 		const type = interaction.options.getInteger('type');
 
-		const result = await get(`https://esi.evetech.net/markets/${region}/orders/?type_id=${type}`)
+		const result = await get(`https://api.eveonline.com/markets/${region}/orders/?type_id=${type}`)
 		await interaction.reply(`${JSON.stringify(result)}`);
 	}
 };

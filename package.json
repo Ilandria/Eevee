@@ -5,12 +5,11 @@
   "engines": {
     "node": "22.x"
   },
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "local-frontend": "heroku local web --port 5001",
-    "deploy-heroku": "git push eevee-heroku main",
-    "start": "node index.js",
-	"deploy-discord": "node deploy-commands.js",
+    "start": "node main.js",
+	"update-discord": "node deploy-commands.js",
 	"logs": "heroku logs --tail"
   },
   "dependencies": {
