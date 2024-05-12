@@ -1,6 +1,6 @@
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 
-class DiscordClient
+export default class DiscordClient
 {
 	constructor(clientId)
 	{
@@ -64,7 +64,3 @@ class DiscordClient
 		}
 	}
 }
-
-module.exports = {
-	DiscordClient
-};
