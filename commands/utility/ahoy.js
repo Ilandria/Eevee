@@ -7,6 +7,6 @@ module.exports = {
 		.setDescription('Replies with a probably-friendly greeting!'),
 	async execute(interaction)
 	{
-		await interaction.reply(`Ahoy ${interaction.user.username}! ${coolAscii()}`);
+		await interaction.reply(`Ahoy @${interaction.user.username}! ${coolAscii()}`);
 	}
 };
