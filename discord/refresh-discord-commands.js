@@ -14,10 +14,10 @@ export default function refreshDiscordCommands(commands, clientId, token)
 	(async () => {
 		try
 		{
-			console.log(`Started refreshing ${commands.length} application (/) commands.`);
+			console.log(`Started refreshing ${commandConfigs.length} application (/) commands.`);
 
 			// The put method is used to fully refresh all commands in the guild with the current set
-			const data = await rest.put(Routes.applicationCommands(clientId), { body: commands });
+			const data = await rest.put(Routes.applicationCommands(clientId), { body: commandConfigs });
 
 			console.log(`Successfully refreshed ${data.length} application (/) commands.`);
 		}
