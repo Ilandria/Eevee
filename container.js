@@ -12,12 +12,13 @@ export default class Container
 	{
 		if (this.registry[name])
 		{
-			throw new Error(`Service with name ${name} is already registered in the application.`);
+			throw new Error(`SYSTEM | Service with name ${name} is already registered in the application.`);
 		}
 
 		if (name && object)
 		{
 			this.registry.set(name, object);
+			console.log(`SYSTEM | Added ${name} to the registry.`);
 		}
 	}
 
@@ -27,7 +28,7 @@ export default class Container
 
 		if (!object)
 		{
-			throw new Error(`Service with name ${name} is not registered in the application.`);
+			throw new Error(`SYSTEM | Service with name ${name} is not registered in the application.`);
 		}
 
 		return object;

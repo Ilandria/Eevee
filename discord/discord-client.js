@@ -57,7 +57,7 @@ export default class DiscordClient
 	 */
 	onLoggedIn(client)
 	{
-		console.log(`DISCORD | Ready! Logged in as ${client.user.tag}`);
+		console.log(`DISCORD | Logged in as ${client.user.tag}`);
 	}
 
 	/**
