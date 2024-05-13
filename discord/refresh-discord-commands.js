@@ -1,14 +1,14 @@
 import { REST, Routes } from 'discord.js';
 
-export default function refreshDiscordCommands(commands, clientId, token)
+export default function refreshDiscordCommands(commandConfigs, clientId, token)
 {
-	const commandConfigs = [];
+	/*const commandConfigs = [];
 
-	for (const discordCommand in commands)
+	for (const config in commands)
 	{
 		commandConfigs.push(discordCommand.config.toJSON());
-		console.log(`Preparing to refresh \"/${discordCommand.config.name}\"`);
-	}
+		console.log(`Preparing to refresh \"/${discordCommand.config.name}\" Discord command.`);
+	}*/
 
 	const rest = new REST().setToken(token);
 

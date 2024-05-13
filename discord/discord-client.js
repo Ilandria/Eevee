@@ -28,9 +28,9 @@ export default class DiscordClient
 		}
 	}
 
-	getCommands()
+	getCommandConfigJSONArray()
 	{
-		return this.commands;
+		return Array.from(this.commands.keys).map(config => config.toJSON());
 	}
 
 	onLoggedIn(client)

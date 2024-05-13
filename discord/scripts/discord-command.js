@@ -13,7 +13,7 @@ export default class DiscordCommand
 
 		this.config = this.create();
 
-		console.log(`Initialized \"/${this.config.name}\" Discord slash command.`);
+		console.log(`Initialized \"/${this.config.name}\" Discord command.`);
 	}
 
 	/**

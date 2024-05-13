@@ -14,7 +14,7 @@ services.register('express', ex);
 services.register('discord', disc);
 
 ex.get('/ahoy', (req, res) => res.send(coolAscii()));
-ex.get('/refresh-discord-commands', (req, res) => refreshDiscordCommands(disc.getCommands(), process.env.DISCORD_CLIENT_ID, process.env.DISCORD_TOKEN));
+ex.get('/refresh-discord-commands', (req, res) => refreshDiscordCommands(disc.getCommandConfigJSONArray(), process.env.DISCORD_CLIENT_ID, process.env.DISCORD_TOKEN));
 ex.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
 
 disc.addCommand(new AhoyCommand());
