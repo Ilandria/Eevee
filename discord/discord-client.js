@@ -1,5 +1,5 @@
 import { Client, Collection, Events, GatewayIntentBits } from 'discord.js';
-import DiscordCommand from './scripts/discord-command.js';
+import DiscordCommand from './discord-command.js';
 
 export default class DiscordClient
 {
@@ -28,9 +28,12 @@ export default class DiscordClient
 		}
 	}
 
-	getCommandConfigJSONArray()
+	addCommands(commands)
 	{
-		return Array.from(this.commands.keys).map(config => config.toJSON());
+		for (const command in commands)
+		{
+			this.addCommand(command);
+		}
 	}
 
 	onLoggedIn(client)

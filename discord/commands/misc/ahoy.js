@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from 'discord.js';
 import coolAscii from 'cool-ascii-faces';
-import DiscordCommand from '../../scripts/discord-command.js';
+import DiscordCommand from '../../discord-command.js';
 
 export default class AhoyCommand extends DiscordCommand
 {

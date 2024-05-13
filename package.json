@@ -10,7 +10,7 @@
   "scripts": {
     "local-frontend": "heroku local web --port 5001",
     "start": "node main.js",
-    "update-discord": "node ./discord/scripts/deploy-commands.js",
+    "refresh-discord": "node ./discord/scripts/refresh-discord-commands.js",
     "logs": "heroku logs --tail",
 	"lint": "eslint ."
   },
