@@ -1,3 +1,5 @@
+import { SlashCommandBuilder } from 'discord.js';
+
 /**
  * Represents a slash command within Discord. See Discord developer documentation for info.
  * This is the base class and it's expected that and command will extend this class then override create() and execute().
@@ -16,16 +18,17 @@ export default class DiscordCommand
 			this.execute = original.execute;
 		}
 
-		this.config = this.create();
+		this.config = new SlashCommandBuilder();
+		this.configure();
 
-		console.log(`Initialized \"/${this.config.name}\" Discord command.`);
+		console.log(`Built \"/${this.config.name}\" Discord command.`);
 	}
 
 	/**
-	 * Creates a slash command definition with SlashCommandBuilder and return it.
+	 * Configures this.config (SlashCommandBuilder).
 	 * @return A SlashCommandBuilder object that has been properly configured.
 	 */
-	create()
+	configure()
 	{
 		throw new Error("create() must be overriden by a child class.");
 	}

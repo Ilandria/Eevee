@@ -1,4 +1,3 @@
-import { SlashCommandBuilder } from 'discord.js';
 import coolAscii from 'cool-ascii-faces';
 import DiscordCommand from '../../discord-command.js';
 
@@ -9,14 +8,13 @@ import DiscordCommand from '../../discord-command.js';
 export default class AhoyCommand extends DiscordCommand
 {
 	/**
-	 * Creates a slash command definition with SlashCommandBuilder and return it.
+	 * Configures this.config (SlashCommandBuilder).
 	 * @return A SlashCommandBuilder object that has been properly configured.
 	 */
-	create()
+	configure()
 	{
-		return new SlashCommandBuilder()
-			.setName('ahoy')
-			.setDescription('Replies with a probably-friendly greeting!');
+		this.config.setName('ahoy');
+		this.config.setDescription('Replies with a probably-friendly greeting!');
 	}
 
 	/**
