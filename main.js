@@ -1,31 +1,21 @@
-require('dotenv').config();
-const express = require('express');
-const fs = require('node:fs');
-const path = require('node:path');
-const coolAscii = require('cool-ascii-faces');
-import DiscordClient from './discord-client';
+import 'dotenv/config';
+import express from 'express';
+import coolAscii from 'cool-ascii-faces';
+import DiscordClient from './discord/discord-client.js';
+import Services from './services.js';
+import refreshDiscordCommands from './discord/refresh-discord-commands.js';
+import AhoyCommand from './discord/commands/misc/ahoy.js';
 
-const PORT = process.env.PORT || 5001
+const services = new Services();
+const ex = express();
+const disc = new DiscordClient();
 
-express()
-	.get('/ahoy', (req, res) => res.send(coolAscii()))
-	.listen(PORT, () => console.log(`Listening on ${PORT}`))
+services.register('express', ex);
+services.register('discord', disc);
 
-const client = new DiscordClient(process.env.DISCORD_CLIENT_ID);
-client.login(process.env.DISCORD_TOKEN);
+ex.get('/ahoy', (req, res) => res.send(coolAscii()));
+ex.get('/refresh-discord-commands', (req, res) => refreshDiscordCommands(disc.getCommands(), process.env.DISCORD_CLIENT_ID, process.env.DISCORD_TOKEN));
+ex.listen(process.env.PORT, () => console.log(`Listening on ${process.env.PORT}`));
 
-const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
-
-for (const folder of commandFolders)
-{
-	const commandsPath = path.join(foldersPath, folder);
-	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-	for (const file of commandFiles)
-	{
-		const filePath = path.join(commandsPath, file);
-		const command = require(filePath);
-		client.addCommand(command);
-	}
-}
+disc.addCommand(new AhoyCommand());
+disc.login(process.env.DISCORD_TOKEN);

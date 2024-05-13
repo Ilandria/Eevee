@@ -1,10 +1,10 @@
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+import { Client, Collection, Events, GatewayIntentBits } from 'discord.js';
+import DiscordCommand from './scripts/discord-command.js';
 
 export default class DiscordClient
 {
-	constructor(clientId)
+	constructor()
 	{
-		this.clientId = clientId;
 		this.commands = new Collection();
 		this.client = new Client({ intents: [GatewayIntentBits.Guilds] });
 		this.client.once(Events.ClientReady, client => this.onLoggedIn(client));
@@ -18,14 +18,19 @@ export default class DiscordClient
 
 	addCommand(command)
 	{
-		if ('config' in command && 'execute' in command)
+		if (command instanceof DiscordCommand)
 		{
 			this.commands.set(command.config.name, command);
 		}
 		else
 		{
-			console.log(`The given command ${JSON.stringify(command)} is missing a required "config" or "execute" property.`);
+			console.log('Tried to add a command object that is not a DiscordCommand');
 		}
+	}
+
+	getCommands()
+	{
+		return this.commands;
 	}
 
 	onLoggedIn(client)
@@ -37,7 +42,7 @@ export default class DiscordClient
 	{
 		if (!interaction.isChatInputCommand()) return;
 
-		const command = interaction.client.commands.get(interaction.commandName);
+		const command = this.commands.get(interaction.commandName);
 
 		if (!command)
 		{
