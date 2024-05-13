@@ -45,7 +45,7 @@ export default class DiscordClient
 	 */
 	addCommands(commands)
 	{
-		for (const command in commands)
+		for (const command of commands)
 		{
 			this.addCommand(command);
 		}
