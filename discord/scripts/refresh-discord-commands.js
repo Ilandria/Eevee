@@ -11,9 +11,9 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 (async () => {
 	try
 	{
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(`DISCORD | Started refreshing ${commands.length} commands.`);
 		const data = await rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), { body: commands });
-		console.log(`Successfully refreshed ${data.length} application (/) commands.`);
+		console.log(`DISCORD | Successfully refreshed ${data.length} commands.`);
 	}
 	catch (error)
 	{

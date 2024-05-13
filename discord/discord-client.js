@@ -35,7 +35,7 @@ export default class DiscordClient
 		}
 		else
 		{
-			console.log('Tried to add a command object that is not a DiscordCommand');
+			console.log('DISCORD | Tried to add a command object that is not a DiscordCommand');
 		}
 	}
 
@@ -57,7 +57,7 @@ export default class DiscordClient
 	 */
 	onLoggedIn(client)
 	{
-		console.log(`Ready! Logged in as ${client.user.tag}`);
+		console.log(`DISCORD | Ready! Logged in as ${client.user.tag}`);
 	}
 
 	/**
@@ -72,7 +72,7 @@ export default class DiscordClient
 
 		if (!command)
 		{
-			console.error(`No command matching ${interaction.commandName} was found.`);
+			console.error(`DISCORD | No command matching ${interaction.commandName} was found.`);
 			return;
 		}
 

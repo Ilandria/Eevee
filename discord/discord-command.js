@@ -21,7 +21,7 @@ export default class DiscordCommand
 		this.config = new SlashCommandBuilder();
 		this.configure();
 
-		console.log(`Built \"/${this.config.name}\" Discord command.`);
+		console.log(`DISCORD | Created \"/${this.config.name}\".`);
 	}
 
 	/**
@@ -30,7 +30,7 @@ export default class DiscordCommand
 	 */
 	configure()
 	{
-		throw new Error("create() must be overriden by a child class.");
+		throw new Error("DISCORD | create() must be overriden by a child class.");
 	}
 
 	/**
@@ -39,6 +39,6 @@ export default class DiscordCommand
 	 */
 	async execute(interaction)
 	{
-		throw new Error("execute() must be overriden by a child class.");
+		throw new Error("DISCORD | execute() must be overriden by a child class.");
 	}
 }
