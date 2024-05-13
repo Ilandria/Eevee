@@ -1,3 +1,6 @@
+/*
+Ran via npm run refresh-discord to update all slash commands registered for the Discord bot.
+*/
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js';
 import generateDiscordCommands from '../discord-commands.js';

@@ -1,6 +1,9 @@
 import { Client, Collection, Events, GatewayIntentBits } from 'discord.js';
 import DiscordCommand from './discord-command.js';
 
+/**
+ * Handles all of the high-level functions of the Discord client and delegating commands.
+ */
 export default class DiscordClient
 {
 	constructor()
@@ -11,11 +14,19 @@ export default class DiscordClient
 		this.client.on(Events.InteractionCreate, async interaction => this.onCommandExecuted(interaction));
 	}
 
+	/**
+	 * Log this client in to Discord.
+	 * @param {*} token Access token.
+	 */
 	login(token)
 	{
 		this.client.login(token);
 	}
 
+	/**
+	 * Add a definition for a slash command.
+	 * @param {DiscordCommand} command the command object to be added.
+	 */
 	addCommand(command)
 	{
 		if (command instanceof DiscordCommand)
@@ -28,6 +39,10 @@ export default class DiscordClient
 		}
 	}
 
+	/**
+	 * Add an array of slash command definitions. Bulk call for addCommand.
+	 * @param {DiscordCommand[]} commands The array of command objects to be added.
+	 */
 	addCommands(commands)
 	{
 		for (const command in commands)
@@ -36,11 +51,19 @@ export default class DiscordClient
 		}
 	}
 
+	/**
+	 * Called once when the client logs in.
+	 * @param {Client} client The client which logged in successfully.
+	 */
 	onLoggedIn(client)
 	{
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 	}
 
+	/**
+	 * Raised whenever a user issues a slash command from Discord.
+	 * @param {*} interaction Context of the slash command used.
+	 */
 	async onCommandExecuted(interaction)
 	{
 		if (!interaction.isChatInputCommand()) return;

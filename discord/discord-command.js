@@ -1,8 +1,13 @@
 /**
  * Represents a slash command within Discord. See Discord developer documentation for info.
+ * This is the base class and it's expected that and command will extend this class then override create() and execute().
  */
 export default class DiscordCommand
 {
+	/**
+	 * Builds the command object.
+	 * @param {DiscordCommand} original Optional. If given, config and execution will be copied from this object.
+	 */
 	constructor(original = null)
 	{
 		if (original)
@@ -27,7 +32,7 @@ export default class DiscordCommand
 
 	/**
 	 * Callback when a user runs this slash command.
-	 * @param {*} interaction Contains the context in which the slash command was executed.
+	 * @param {Interaction} interaction Contains the context in which the slash command was executed.
 	 */
 	async execute(interaction)
 	{
