@@ -28,6 +28,7 @@ export class EveRequestCache
 
 		if (!data) return null;
 
+		// If the data exists but has expired, remove it and don't return anything.
 		if (data.expiry < Date.now())
 		{
 			this.cache.delete(name);
@@ -43,9 +44,9 @@ export class EveRequestCache
 	 * @param data The data to store.
 	 * @param expiry Optional. The date (in milliseconds since Jan 1st 1970 00:00:00 UTC) that the data should expire.
 	 */
-	store(name: string, data: any, expiry: number = null)
+	store(name: string, data: any, expiry: number = 0)
 	{
-		this.cache[name] = new EveRequestData(expiry != null ? expiry : Date.now() + this.defaultTtl, data);
+		this.cache[name] = new EveRequestData(expiry != 0 ? expiry : Date.now() + this.defaultTtl, data);
 	}
 }
 

@@ -59,7 +59,7 @@ export default class EveWebClient
 
 		if (cachedData)
 		{
-			console.log(`EVE | Returning cached data for ${name}.`);
+			console.log(`EVE | Returning cached data for ${name}. Valid until ${new Date(cachedData.expiry).toString()}`);
 			return cachedData.data;
 		}
 
