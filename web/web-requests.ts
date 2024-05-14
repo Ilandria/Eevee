@@ -1,4 +1,4 @@
-export async function httpGet(url = "")
+export async function httpGet(url: string)
 {
 	const response = await fetch(url,
 	{
@@ -16,7 +16,7 @@ export async function httpGet(url = "")
 	return response.json();
 }
 
-export async function httpPost(url = "", bodyObject = {})
+export async function httpPost(url: string, bodyObject = {})
 {
 	const response = await fetch(url,
 	{

@@ -4,5 +4,8 @@ export default [
 			semi: "error",
 			"prefer-const": "error"
 		}
+	},
+	{
+		ignores: ["build"]
 	}
 ];

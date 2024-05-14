@@ -8,11 +8,12 @@
   },
   "main": "main.js",
   "scripts": {
-    "local-frontend": "heroku local web --port 5001",
-    "start": "node main.js",
+    "local": "npm run build && heroku local web --port 5001",
+    "start": "node ./build/main.js",
     "refresh-discord": "node ./discord/scripts/refresh-discord-commands.js",
     "logs": "heroku logs --tail",
-    "lint": "eslint ."
+    "lint": "eslint .",
+	"build": "npm run lint && npx tsc"
   },
   "dependencies": {
     "cool-ascii-faces": "^1.3.4",
@@ -24,7 +25,8 @@
     "pg": "^8.11.5"
   },
   "devDependencies": {
-    "tape": "^5.7.4"
+    "tape": "^5.7.4",
+    "typescript": "^5.4.5"
   },
   "repository": {
     "type": "git",

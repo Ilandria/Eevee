@@ -19,9 +19,9 @@ export default class AhoyCommand extends DiscordCommand
 
 	/**
 	 * Callback when a user runs this slash command.
-	 * @param {Interaction} interaction Contains the context in which the slash command was executed.
+	 * @param {*} interaction Contains the context in which the slash command was executed.
 	 */
-	async execute(interaction)
+	async execute(interaction: any)
 	{
 		await interaction.reply(`Ahoy ${interaction.user.username}! ${coolAscii()}`);
 	}

@@ -6,7 +6,10 @@ import {httpGet, httpPost} from "../web/web-requests.js";
  */
 export default class EveWebClient
 {
-	constructor(apiBaseUrl)
+	apiBaseUrl: string;
+	requests: Map<string, EveWebRequest>;
+
+	constructor(apiBaseUrl: string)
 	{
 		this.apiBaseUrl = apiBaseUrl;
 		this.requests = new Map();
@@ -16,7 +19,7 @@ export default class EveWebClient
 	 * Add a configured web request to the client for later use.
 	 * @param {EveWebRequest} eveWebRequest The EveWebRequest object defining how to run the request.
 	 */
-	addWebRequest(eveWebRequest)
+	addWebRequest(eveWebRequest: EveWebRequest)
 	{
 		const name = eveWebRequest.name;
 
@@ -33,7 +36,7 @@ export default class EveWebClient
 	 * Add an array of web requests. Bulk call for addWebRequest.
 	 * @param {EveWebRequest[]} webRequests The array of web request objects to be added.
 	 */
-	addWebRequests(webRequests)
+	addWebRequests(webRequests: EveWebRequest[])
 	{
 		for (const webRequest of webRequests)
 		{
@@ -46,7 +49,7 @@ export default class EveWebClient
 	 * @param {string} name The name of the web request to run.
 	 * @returns The web call result.
 	 */
-	async execute(name)
+	async execute(name: string)
 	{
 		const request = this.requests[name];
 
@@ -73,7 +76,7 @@ export default class EveWebClient
 			default:
 				const error = new Error(`EVE | EveWebClient is not configured to handle \"${request.method}\" requests.`);
 				console.error(error.message);
-				throw new Error(error);
+				throw new Error(error.message);
 		}
 
 		return response;

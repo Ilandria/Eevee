@@ -6,6 +6,9 @@ import { SlashCommandBuilder } from 'discord.js';
  */
 export default class DiscordCommand
 {
+	create: any;
+	config: SlashCommandBuilder;
+
 	/**
 	 * Builds the command object.
 	 * @param {DiscordCommand} original Optional. If given, config and execution will be copied from this object.
@@ -35,9 +38,9 @@ export default class DiscordCommand
 
 	/**
 	 * Callback when a user runs this slash command.
-	 * @param {Interaction} interaction Contains the context in which the slash command was executed.
+	 * @param {*} interaction Contains the context in which the slash command was executed.
 	 */
-	async execute(interaction)
+	async execute(interaction: any)
 	{
 		throw new Error("DISCORD | execute() must be overriden by a child class.");
 	}

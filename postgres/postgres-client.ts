@@ -6,7 +6,9 @@ const { Client } = pg;
  */
 export default class PostgresClient
 {
-	constructor(connectionString)
+	client: any;
+
+	constructor(connectionString: string)
 	{
 		this.client = new Client({
 			connectionString: connectionString

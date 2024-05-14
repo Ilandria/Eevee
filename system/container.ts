@@ -3,6 +3,8 @@
  */
 export default class Container
 {
+	registry: Map<string, any>;
+
 	constructor()
 	{
 		this.registry = new Map();
