@@ -28,7 +28,7 @@ container.add('eve', eve);
 
 // Express config.
 const ex = express();
-ex.get('/ahoy', (req, res) => res.send(coolAscii())); // Todo: Remove this test code.
+ex.get('/', (req, res) => res.send(`Hoooi! ${coolAscii()}`)); // Todo: Remove this test code.
 ex.listen(process.env.PORT, () => console.log(`EXPRESS | Listening on ${process.env.PORT}`));
 container.add('express', ex);
 

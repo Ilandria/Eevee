@@ -10,7 +10,12 @@ export default class Container
 		this.registry = new Map();
 	}
 
-	add(name, object)
+	/**
+	 * Add an object to the container and give it a name for later access.
+	 * @param name The name to register.
+	 * @param object The object to register.
+	 */
+	add(name: string, object: any)
 	{
 		if (this.registry[name])
 		{
@@ -24,7 +29,12 @@ export default class Container
 		}
 	}
 
-	find(name)
+	/**
+	 * Find an object by the name given in add().
+	 * @param name The object to find by name.
+	 * @returns The registered object.
+	 */
+	find(name: string)
 	{
 		const object = this.registry[name];
 
