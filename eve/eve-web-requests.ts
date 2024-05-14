@@ -1,4 +1,5 @@
 import GetMarketPricesRequest from './requests/get-market-prices.js';
+import GetItemGroupsRequest from "./requests/get-item-groups.js";
 
 /**
  * Generates an array containing an instance of every eve web request.
@@ -7,7 +8,8 @@ import GetMarketPricesRequest from './requests/get-market-prices.js';
 export default function generateEveWebRequests()
 {
 	const requests = [
-		new GetMarketPricesRequest()
+		new GetMarketPricesRequest(),
+		new GetItemGroupsRequest()
 	];
 
 	return requests;
