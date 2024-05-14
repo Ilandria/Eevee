@@ -15,7 +15,7 @@ export default class EveWebClient
 	{
 		this.apiBaseUrl = apiBaseUrl;
 		this.requests = new Map();
-		this.cache = new EveRequestCache(30000);
+		this.cache = new EveRequestCache(300000);
 	}
 
 	/**
