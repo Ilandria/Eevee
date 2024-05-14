@@ -46,7 +46,7 @@ export class EveRequestCache
 	 */
 	store(name: string, data: any, expiry: number = 0)
 	{
-		this.cache[name] = new EveRequestData(expiry != 0 ? expiry : Date.now() + this.defaultTtl, data);
+		this.cache[name] = new EveRequestData(expiry != 0 ? expiry : (Date.now() + this.defaultTtl), data);
 	}
 }
 
