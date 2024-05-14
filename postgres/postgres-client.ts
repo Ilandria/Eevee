@@ -27,16 +27,6 @@ export default class PostgresClient
 	{
 		this.client.connect();
 		console.log('POSTGRES | Connected.');
-
-		this.client.query('SELECT table_schema,table_name FROM information_schema.tables;', (error, result) =>
-		{
-			if (error) throw error;
-
-			for (let row of result.rows)
-			{
-				console.log(`POSTGRES | ${JSON.stringify(row)}`);
-			}
-		});
 	}
 
 	/**
