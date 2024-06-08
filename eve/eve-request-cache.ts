@@ -28,10 +28,18 @@ export class EveRequestCache
 
 		if (!data) return null;
 
-		// If the data exists but has expired, remove it and don't return anything.
+		// Check for and delete any expired data. This is a slight performance hit but improves memeory usage.
 		if (data.expiry < Date.now())
 		{
-			this.cache.delete(name);
+			for(const i in this.cache)
+			{
+				if (this.cache[i].expiry < Date.now())
+				{
+					// Todo: Test and make sure this works.
+					this.cache.delete(i);
+				}
+			}
+
 			data = null;
 		}
 

@@ -33,6 +33,7 @@ const ex = express();
 ex.set("view engine", "ejs");
 ex.set("views", path.join(path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../"), "pages/views"));
 ex.get('/', (req, res) => res.send(`Hoooi! ${coolAscii()}`)); // Todo: Remove this test code.
+ex.get('/faces', (req, res) => res.send(`${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} `)); // Todo: Remove this test code.
 ex.get('/adrenamite', (req, res) => res.render("adrenamite"));
 ex.get('/kryojyn', (req, res) => res.render("kryojyn"));
 ex.get('/api/item-groups', async (request, response) => response.send(JSON.stringify(await eve.execute("item-groups"))));
