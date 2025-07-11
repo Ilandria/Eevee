@@ -36,6 +36,7 @@ ex.get('/', (req, res) => res.send(`Hoooi! ${coolAscii()}`)); // Todo: Remove th
 ex.get('/faces', (req, res) => res.send(`${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} `)); // Todo: Remove this test code.
 ex.get('/adrenamite', (req, res) => res.render("adrenamite"));
 ex.get('/kryojyn', (req, res) => res.render("kryojyn"));
+ex.get('/league-helper', (req, res) => res.render("league-helper"));
 ex.get('/api/item-groups', async (request, response) => response.send(JSON.stringify(await eve.execute("item-groups"))));
 ex.get('/api/market-prices', async (request, response) => response.send(JSON.stringify(await eve.execute("market-prices"))));
 ex.listen(process.env.PORT, () => console.log(`EXPRESS | Listening on ${process.env.PORT}`));
