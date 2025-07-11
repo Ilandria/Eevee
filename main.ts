@@ -9,6 +9,7 @@ import generateDiscordCommands from './discord/discord-commands.js';
 import PostgresClient from './postgres/postgres-client.js';
 import EveWebClient from './eve/eve-web-client.js';
 import generateEveWebRequests from './eve/eve-web-requests.js';
+import { helloOpenAI } from "./pages/src/league-helper.js";
 
 const container = new Container();
 
@@ -36,7 +37,10 @@ ex.get('/', (req, res) => res.send(`Hoooi! ${coolAscii()}`)); // Todo: Remove th
 ex.get('/faces', (req, res) => res.send(`${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} ${coolAscii()} `)); // Todo: Remove this test code.
 ex.get('/adrenamite', (req, res) => res.render("adrenamite"));
 ex.get('/kryojyn', (req, res) => res.render("kryojyn"));
-ex.get('/league-helper', (req, res) => res.render("league-helper"));
+ex.get('/league-helper', (req, res) => {
+	const hello = helloOpenAI();
+	res.render('Hello: ', { message: hello });
+});
 ex.get('/api/item-groups', async (request, response) => response.send(JSON.stringify(await eve.execute("item-groups"))));
 ex.get('/api/market-prices', async (request, response) => response.send(JSON.stringify(await eve.execute("market-prices"))));
 ex.listen(process.env.PORT, () => console.log(`EXPRESS | Listening on ${process.env.PORT}`));
