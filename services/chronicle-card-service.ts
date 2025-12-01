@@ -5,7 +5,6 @@ import PostgresClient from "./postgres-client.js";
  */
 export default class ChronicleCardService
 {
-	private static readonly cardTable = "\"eve-static\".cards";
 	private databaseService: PostgresClient;
 
 	constructor(databaseService: PostgresClient)
@@ -15,6 +14,6 @@ export default class ChronicleCardService
 
 	public async getAllCards(): Promise<object>
 	{
-		return await this.databaseService.query(`SELECT * FROM ${ChronicleCardService.cardTable} ORDER BY id ASC`);
+		return await this.databaseService.query(`SELECT * FROM "eve-static".cards ORDER BY id ASC`);
 	}
 }
