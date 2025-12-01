@@ -9,7 +9,7 @@ export default class PostgresClient
 
 	public constructor()
 	{
-		this.client = postgres(null, {ssl:true});
+		this.client = postgres(null);
 	}
 
 	public async query(query: string): Promise<object>
