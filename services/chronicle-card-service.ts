@@ -14,6 +14,6 @@ export default class ChronicleCardService
 
 	public async getAllCards(): Promise<object>
 	{
-		return await this.databaseService.query(`SELECT * FROM "eve-static".cards ORDER BY id ASC`);
+		return await this.databaseService.query('SELECT * FROM \"eve-static\".cards ORDER BY id ASC');
 	}
 }
