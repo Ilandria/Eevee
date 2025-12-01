@@ -11,16 +11,9 @@ export default class DiscordCommand
 
 	/**
 	 * Builds the command object.
-	 * @param {DiscordCommand} original Optional. If given, config and execution will be copied from this object.
 	 */
-	constructor(original = null)
+	constructor()
 	{
-		if (original)
-		{
-			this.create = original.create;
-			this.execute = original.execute;
-		}
-
 		this.config = new SlashCommandBuilder();
 		this.configure();
 

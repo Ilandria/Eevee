@@ -23,7 +23,7 @@
     "eslint": "^9.2.0",
     "express": "^4.15.2",
     "openai": "^5.9.0",
-    "pg": "^8.11.5"
+    "postgres": "^3.4.7"
   },
   "devDependencies": {
     "tape": "^5.7.4",

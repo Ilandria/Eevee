@@ -6,20 +6,23 @@ import coolAscii from 'cool-ascii-faces';
 import DiscordClient from './discord/discord-client.js';
 import Container from './system/container.js';
 import generateDiscordCommands from './discord/discord-commands.js';
-import PostgresClient from './postgres/postgres-client.js';
+import PostgresClient from './services/postgres-client.js';
 import EveWebClient from './eve/eve-web-client.js';
 import generateEveWebRequests from './eve/eve-web-requests.js';
+import ChronicleCardService from "./services/chronicle-card-service.js";
 
 const container = new Container();
 
 // Postgres config.
 const postgres = new PostgresClient(process.env.DATABASE_URL);
-postgres.connect();
 container.add('database', postgres);
+
+// Chronicle config.
+container.add('chronicleCardService', new ChronicleCardService(container.find('database')));
 
 // Discord config.
 const disc = new DiscordClient();
-disc.addCommands(generateDiscordCommands());
+disc.addCommands(generateDiscordCommands(container.find('chronicleCardService')));
 disc.login(process.env.DISCORD_TOKEN);
 container.add('discord', disc);
 

@@ -3,7 +3,7 @@ Ran via npm run refresh-discord to update all slash commands registered for the 
 */
 import 'dotenv/config';
 import { REST, Routes } from 'discord.js';
-import generateDiscordCommands from '../discord-commands.js';
+import generateDiscordCommands from '../../build/discord/discord-commands.js';
 
 const commands = generateDiscordCommands().map(command => command.config.toJSON());
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
