@@ -7,9 +7,9 @@ export default class PostgresClient
 {
 	private client: postgres.Sql<{}>;
 
-	public constructor(connectionString: string)
+	public constructor()
 	{
-		this.client = postgres(connectionString);
+		this.client = postgres();
 	}
 
 	public async query(query: string): Promise<object>

@@ -14,7 +14,7 @@ import ChronicleCardService from "./services/chronicle-card-service.js";
 const container = new Container();
 
 // Postgres config.
-const postgres = new PostgresClient(process.env.DATABASE_URL);
+const postgres = new PostgresClient();
 container.add('database', postgres);
 
 // Chronicle config.
