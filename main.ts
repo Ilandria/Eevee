@@ -18,11 +18,12 @@ const postgres = new PostgresClient(process.env.DATABASE_URL);
 container.add('database', postgres);
 
 // Chronicle config.
-container.add('chronicleCardService', new ChronicleCardService(container.find('database')));
+const cardService = new ChronicleCardService(postgres);
+container.add('chronicleCardService', cardService);
 
 // Discord config.
 const disc = new DiscordClient();
-disc.addCommands(generateDiscordCommands(container.find('chronicleCardService')));
+disc.addCommands(generateDiscordCommands(cardService));
 disc.login(process.env.DISCORD_TOKEN);
 container.add('discord', disc);
 
