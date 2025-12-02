@@ -1,3 +1,5 @@
+import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "./chronicle-enums.js";
+
 export default class ChronicleCard
 {
 	public name: string;
@@ -18,6 +20,6 @@ export default class ChronicleCard
 
 	public getInfo(): string
 	{
-		return `${this.name} (${this.setCode} ${this.setNumber} ${this.rarity}) (${this.tenet} ${this.rune} ${this.types})`;
+		return `${this.name} (${this.setCode} #${this.setNumber} ${ChronicleRarity[this.rarity]}) (${ChronicleTenet[this.tenet]} ${ChronicleRune[this.rune]} ${this.types})`;
 	}
 }
