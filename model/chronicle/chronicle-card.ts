@@ -16,7 +16,7 @@ export default class ChronicleCard
 	public rarity: number;
 	public id: number;
 
-	public toString(): string
+	public getInfo(): string
 	{
 		return `${this.name} (${this.setCode} ${this.setNumber} ${this.rarity}) (${this.tenet} ${this.rune} ${this.types})`;
 	}

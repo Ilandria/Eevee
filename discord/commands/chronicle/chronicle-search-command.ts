@@ -38,9 +38,9 @@ export default class ChronicleSearchCommand extends DiscordCommand
 
 		result.forEach((card: ChronicleCard) =>
 		{
-			reply += "\n * " + card.toString();
+			reply = `${reply}\n * ${card.getInfo()}`;
 		});
 
-		await interaction.reply(`${reply}`);
+		await interaction.reply(reply);
 	}
 }
