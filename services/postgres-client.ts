@@ -1,19 +1,23 @@
-import postgres from 'postgres';
+import { Client } from 'pg'
+
 
 /**
  * Wrapper around pg.Client just to keep initialization clean.
  */
 export default class PostgresClient
 {
-	private client: postgres.Sql<{}>;
+	private client;
 
 	public constructor()
 	{
-		this.client = postgres(null, { ssl : { require: true, rejectUnauthorized: false }});
+		this.client = new Client();
 	}
 
 	public async query(query: string): Promise<object>
 	{
-		return await this.client`${query}`;
+		await this.client.connect();
+		const result = await this.client.query(query);
+		await this.client.end();
+		return result;
 	}
 }
