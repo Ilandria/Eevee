@@ -1,3 +1,4 @@
+import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import ChronicleCardService from "../../../services/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 
@@ -32,10 +33,10 @@ export default class ChronicleSearchCommand extends DiscordCommand
 	 */
 	async execute(interaction: any)
 	{
-		const result = await this.cardService.getAllCards();
-		let reply = `There are currently ${result.length} cards in Chronicle:`
+		const result: ChronicleCard[] = await this.cardService.getAllCards();
+		let reply = `There are currently ${result.length} cards in Chronicle:`;
 
-		result.forEach(card =>
+		result.forEach((card: ChronicleCard) =>
 		{
 			reply += "\n * " + card.toString();
 		});
