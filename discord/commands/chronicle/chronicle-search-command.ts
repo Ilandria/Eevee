@@ -34,7 +34,7 @@ export default class ChronicleSearchCommand extends DiscordCommand
 	async execute(interaction: any)
 	{
 		const result: ChronicleCard[] = await this.cardService.getAllCards();
-		let reply = `There are currently ${result.length} cards in Chronicle:`;
+		let reply: string = `There are currently ${result.length} cards in Chronicle:`;
 
 		result.forEach((card: ChronicleCard) =>
 		{
