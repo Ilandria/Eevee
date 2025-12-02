@@ -3,11 +3,11 @@ export default class ChronicleCard
 	public name: string;
 	public artUrl: string;
 	public artist: string;
-	public copyrightYears: string;
+	public copyright: string;
 	public setCode: string;
 	public setNumber: number;
-	public runeType: number;
-	public subtypes: string;
+	public rune: number;
+	public types: string;
 	public tenet: number;
 	public cost: number;
 	public attack: number;
@@ -15,4 +15,9 @@ export default class ChronicleCard
 	public rules: string;
 	public rarity: number;
 	public id: number;
+
+	public toString(): string
+	{
+		return `${this.name} (${this.setCode} ${this.setNumber} ${this.rarity}) (${this.tenet} ${this.rune} ${this.types})`;
+	}
 }
