@@ -41,6 +41,6 @@ export default class ChronicleSearchCommand extends DiscordCommand
 			reply += "\n * " + card.toString();
 		});
 
-		await interaction.reply(`${result}`);
+		await interaction.reply(`${reply}`);
 	}
 }
