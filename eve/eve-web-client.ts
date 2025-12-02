@@ -1,5 +1,5 @@
 import EveWebRequest from "./eve-web-request.js";
-import {httpGet, httpPost} from "../web/web-requests.js";
+import {httpGet, httpPost} from "../model/web-requests.js";
 import {EveRequestCache, EveRequestData} from "./eve-request-cache.js";
 
 /**

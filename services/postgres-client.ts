@@ -13,11 +13,11 @@ export default class PostgresClient
 		this.client = new Client();
 	}
 
-	public async query(query: string): Promise<object>
+	public async query(query: string): Promise<object[]>
 	{
 		await this.client.connect();
 		const result = await this.client.query(query);
 		await this.client.end();
-		return result;
+		return result.rows;
 	}
 }

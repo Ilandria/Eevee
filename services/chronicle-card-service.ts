@@ -1,3 +1,4 @@
+import ChronicleCard from "../model/chronicle/chronicle-card.js";
 import PostgresClient from "./postgres-client.js";
 
 /**
@@ -12,8 +13,11 @@ export default class ChronicleCardService
 		this.databaseService = databaseService;
 	}
 
-	public async getAllCards(): Promise<object>
+	public async getAllCards(): Promise<ChronicleCard[]>
 	{
-		return await this.databaseService.query('SELECT * FROM "eve-static".cards ORDER BY id ASC');
+		const result = await this.databaseService.query('SELECT * FROM "eve-static".cards ORDER BY id ASC');
+		console.log(result[0]);
+		const cards: ChronicleCard[] = [];
+		return cards;
 	}
 }
