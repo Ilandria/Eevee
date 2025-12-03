@@ -36,7 +36,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 	{
 		await interaction.deferReply();
 
-		const canvas = createCanvas(1500, 2100, "pdf");
+		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
 		context.fillStyle = "white";
 		context.fillRect(0, 0, canvas.width, canvas.height);
