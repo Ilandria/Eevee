@@ -1,4 +1,5 @@
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
+import { ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCardService from "../../../services/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 
@@ -25,6 +26,7 @@ export default class ChronicleSearchCommand extends DiscordCommand
 	{
 		this.config.setName('chron-search');
 		this.config.setDescription('Search the Chronicle card database.');
+		this.config.addStringOption((option) => option.setName('name').setDescription('A whole or partial name to search for.'));
 	}
 
 	/**
@@ -33,14 +35,18 @@ export default class ChronicleSearchCommand extends DiscordCommand
 	 */
 	async execute(interaction: any)
 	{
-		const result: ChronicleCard[] = await this.cardService.getAllCards();
-		let reply: string = `There are currently ${result.length} cards in Chronicle:`;
+		await interaction.deferReply();
+
+		const nameOption: string = interaction.options.getString('name');
+
+		const result: ChronicleCard[] = await this.cardService.getCards(nameOption);
+		let reply: string = `${result.length} card(s) found:`;
 
 		result.forEach((card: ChronicleCard) =>
 		{
 			reply = `${reply}\n * ${card.getInfo()}`;
 		});
 
-		await interaction.reply(reply);
+		await interaction.editReply(reply);
 	}
 }
