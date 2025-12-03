@@ -1,6 +1,6 @@
 import coolAscii from 'cool-ascii-faces';
 import DiscordCommand from '../../discord-command.js';
-import randomGreeting from 'native-greetings'
+import findGreetingByCountry from 'native-greetings'
 
 /**
  * Says hello to the user! This is mostly a bare-bones example on how to set up commands.
@@ -24,6 +24,6 @@ export default class AhoyCommand extends DiscordCommand
 	 */
 	async execute(interaction: any)
 	{
-		await interaction.reply(`${randomGreeting()} ${interaction.user.username}! ${coolAscii()}`);
+		await interaction.reply(`${findGreetingByCountry('Canada')} ${interaction.user.username}! ${coolAscii()}`);
 	}
 }
