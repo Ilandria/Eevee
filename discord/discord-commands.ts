@@ -1,4 +1,5 @@
 import ChronicleCardService from "../services/chronicle-card-service.js";
+import ChronicleGenerateCardCommand from "./commands/chronicle/chronicle-generate-card-command.js";
 import ChronicleSearchCommand from "./commands/chronicle/chronicle-search-command.js";
 import AhoyCommand from "./commands/misc/ahoy.js";
 
@@ -10,7 +11,8 @@ export default function generateDiscordCommands(cardService: ChronicleCardServic
 {
 	const commands = [
 		new AhoyCommand(),
-		new ChronicleSearchCommand(cardService)
+		new ChronicleSearchCommand(cardService),
+		new ChronicleGenerateCardCommand(cardService)
 	];
 
 	return commands;
