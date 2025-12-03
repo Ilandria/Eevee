@@ -26,7 +26,7 @@ export default class ChronicleCardService
 
 		if (name)
 		{
-			query += `WHERE 'name' LIKE '%${name}%' `;
+			query += `WHERE LOWER(name) LIKE LOWER('%${name}%') `;
 		}
 
 		query += 'ORDER by id ASC;';
