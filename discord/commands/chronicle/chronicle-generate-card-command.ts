@@ -45,7 +45,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		cardArt.onload = async function ()
 		{
-			context.drawImage(cardArt, canvas.width / 2, canvas.height / 2, cardArt.width, cardArt.height);
+			context.drawImage(cardArt, 0, 0, cardArt.width, cardArt.height);
 
 			const buffer = canvas.toBuffer("image/png");
 			const attachment = new AttachmentBuilder(buffer, {name: "card.png"});
