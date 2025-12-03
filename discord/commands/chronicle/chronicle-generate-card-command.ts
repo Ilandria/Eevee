@@ -41,7 +41,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillStyle = "white";
 		context.fillRect(0, 0, canvas.width, canvas.height);
 		const cardArt = new Image();
-		cardArt.src = "https://drive.google.com/uc?export=view&id=1b_1mLR3ovcVcxzVM9by3vm62iJBUYLpb";
+		cardArt.src = "https://drive.google.com/uc?export=view&id=12Y4POh8iC9mf-jAGpSbU3DRfMa8K9HFQ";
 
 		cardArt.onload = async function ()
 		{
