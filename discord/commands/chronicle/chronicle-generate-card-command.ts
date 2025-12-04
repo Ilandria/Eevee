@@ -132,12 +132,9 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.textBaseline = "middle";
 
 		// Card name.
-		let fontSize = 150;
-		context.font = `${fontSize}px Garamond`;
+		let fontSize = 120;
+		context.font = `normal 900 ${fontSize}px Garamond`;
 		context.fillText(card.name, canvas.width / 2, 110, 900);
-
-		// Card stat setup.
-		context.font = `${fontSize}px Garamond`;
 
 		// Rune.
 		context.fillText(`${card.rune as ChronicleRune}`.at(0), 150, 150);
@@ -158,21 +155,21 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Collection.
 		context.textAlign = "left";
-		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5);
+		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5, 225);
 
 		// Artist.
-		context.fillText(card.artist, 337.5, canvas.height - 75);
+		context.fillText(card.artist, 337.5, canvas.height - 75, 225);
 
 		// Copyright.
 		context.textAlign = "right";
-		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5);
+		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5, 225);
 
 		// Creator.
-		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75);
+		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 
 		// Subtypes.
 		fontSize = 60;
-		context.font = `${fontSize}px Garamond`;
+		context.font = `normal 900 ${fontSize}px Garamond`;
 		context.textAlign = "center";
 		context.textBaseline = "hanging";
 		context.fillText(card.types, canvas.width / 2, 215, 600);
