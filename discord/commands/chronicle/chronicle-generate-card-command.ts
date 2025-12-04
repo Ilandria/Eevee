@@ -118,7 +118,10 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = '400pt "LondrinaSolid" textAlign=center';
+		context.font = "300px LondrinaSolid";
+		context.textAlign = "center";
+		context.shadowColor = "black";
+		context.shadowBlur = 10;
 		context.fillText(card.name, canvas.width / 2, 160);
 
 		// Finalize card.
