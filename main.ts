@@ -12,11 +12,19 @@ import generateEveWebRequests from './eve/eve-web-requests.js';
 import ChronicleCardService from "./services/chronicle-card-service.js";
 import ChronicleComponentService from "./services/chronicle-component-service.js";
 import { registerFont } from "canvas";
+import http from 'http';
+import fs from 'fs';
 
 const container = new Container();
 
 // Canvas.
-registerFont("./fonts/Tipos Pereira - LondrinaBlack-Regular.otf", {family: "Londrina Black"});
+const londrinaSolid = "LondrinaSolid"
+const file = fs.createWriteStream(londrinaSolid + '.ttf');
+const request = http.get('https://github.com/google/fonts/blob/master/ofl/' + londrinaSolid.toLowerCase() + '/' + londrinaSolid + '-Regular.ttf?raw=true', function(response)
+{
+	response.pipe(file);
+	registerFont(londrinaSolid + '.ttf', { family: londrinaSolid });
+});
 
 // Postgres config.
 const postgres = new PostgresClient();
