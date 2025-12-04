@@ -1,6 +1,6 @@
 import DiscordCommand from '../../discord-command.js';
 import { EmbedBuilder, AttachmentBuilder } from 'discord.js';
-import { createCanvas, Image, loadImage, registerFont } from "canvas";
+import { CanvasRenderingContext2D, createCanvas, Image, loadImage, registerFont } from "canvas";
 import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import ChronicleComponentService from "../../../services/chronicle-component-service.js";
@@ -171,6 +171,16 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		// Creator.
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 
+		// Rules.
+		context.font = `50px Garamond`;
+		context.textAlign = "left";
+		const lines: string[] = this.getLinesForParagraphs(context, card.rules, 900);
+
+		for (let i: number = 0; i < lines.length; i++)
+		{
+			context.fillText(lines[i], 300, canvas.height - (300 + 60 * (lines.length - i - 1)), 900);
+		}
+
 		// Finalize card.
 		statusCallback(`Sealing... ${coolAscii()}`);
 		const reply: DTO = new DTO();
@@ -182,6 +192,50 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		statusCallback(`Here's your rune! ${coolAscii()}`);
 		return reply;
 	}
+
+	private getLinesForParagraphs(context: CanvasRenderingContext2D, text: string, maxWidth: number): string[]
+	{
+		let paragraphs: string[] = text.split("\n");
+		let lines: string[] = [];
+
+		paragraphs.forEach(paragraph =>
+		{
+			let paragraphLines = this.getLines(context, paragraph, maxWidth);
+
+			paragraphLines.forEach(line =>
+			{
+				lines.push(line);
+			});
+		});
+
+		return lines;
+	}
+
+	private getLines(context: CanvasRenderingContext2D, text: string, maxWidth: number): string[]
+	{
+		let words: string[] = text.split(" ");
+		let lines: string[] = [];
+		let currentLine: string = words[0];
+
+		for (let i = 1; i < words.length; i++)
+		{
+			let word: string = words[i];
+			let width = context.measureText(currentLine + " " + word).width;
+
+			if (width < maxWidth)
+			{
+				currentLine += " " + word;
+			}
+			else
+			{
+				lines.push(currentLine);
+				currentLine = word;
+			}
+		}
+
+		lines.push(currentLine);
+		return lines;
+}
 }
 
 class DTO
