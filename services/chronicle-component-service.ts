@@ -15,13 +15,20 @@ export default class ChronicleComponentService
 
 	public async getTenetFrameUrl(tenet: ChronicleTenet): Promise<string>
 	{
-		const result = await this.databaseService.query<string>(`SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'frame-${ChronicleTenet[tenet].toLowerCase()}'`);
-		return result[0];
+		const query: string = `SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'frame-${ChronicleTenet[tenet].toLowerCase()}'`;
+		const result = await this.databaseService.query<DTO>(query);
+		return result[0].url;
 	}
 
 	public async getRulesBgUrl(): Promise<string>
 	{
-		const result = await this.databaseService.query<string>(`SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'background-rules'`);
-		return result[0];
+		const result = await this.databaseService.query<DTO>(`SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'background-rules'`);
+		return result[0].url;
 	}
+}
+
+class DTO
+{
+	public component: string;
+	public url: string;
 }
