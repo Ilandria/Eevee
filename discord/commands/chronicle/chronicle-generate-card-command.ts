@@ -132,7 +132,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.textBaseline = "middle";
 
 		// Card name.
-		let fontSize = 130;
+		let fontSize = 150;
 		context.font = `${fontSize}px Garamond`;
 		while (context.measureText(card.name).width > 900)
 		{
@@ -142,11 +142,11 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.name, canvas.width / 2, 110);
 
 		// Card stat setup.
-		fontSize = 130;
+		fontSize = 150;
 		context.font = `${fontSize}px Garamond`;
 
 		// Rune.
-		context.fillText(`${ChronicleRune[card.rune]}`.at(0), 150, 150);
+		context.fillText(`${card.rune as ChronicleRune}`.at(0), 150, 150);
 
 		// Attack.
 		if (card.attack) context.fillText(card.attack.toString(), canvas.width - 150, 150);
@@ -156,6 +156,25 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Cost.
 		context.fillText(card.cost.toString(), 150, canvas.height - 150);
+
+		// Card meta setup.
+		fontSize = 50;
+		context.font = `${fontSize}px Garamond`;
+		context.textBaseline = "alphabetic";
+
+		// Collection.
+		context.textAlign = "left";
+		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5);
+
+		// Artist.
+		context.fillText(card.artist, 337.5, canvas.height - 75);
+
+		// Copyright.
+		context.textAlign = "right";
+		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5);
+
+		// Creator.
+		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75);
 
 		// Finalize card.
 		statusCallback(`Sealing... ${coolAscii()}`);
