@@ -31,9 +31,10 @@ export default class ChronicleCardService
 
 		query += 'ORDER by id ASC;';
 
-		const result = await this.databaseService.query<object>(query);
-		const cards: ChronicleCard[] = result.map(cardData => Object.assign(new ChronicleCard(), cardData));
+		const result = await this.databaseService.query<ChronicleCard>(query);
+		//const cards: ChronicleCard[] = result.map(cardData => Object.assign(new ChronicleCard(), cardData));
 
-		return cards;
+		//return cards;
+		return result;
 	}
 }
