@@ -12,7 +12,7 @@ import generateEveWebRequests from './eve/eve-web-requests.js';
 import ChronicleCardService from "./services/chronicle-card-service.js";
 import ChronicleComponentService from "./services/chronicle-component-service.js";
 import { registerFont } from "canvas";
-import http from 'http';
+import https from 'https';
 import fs from 'fs';
 
 const container = new Container();
@@ -20,7 +20,7 @@ const container = new Container();
 // Canvas.
 const londrinaSolid = "LondrinaSolid"
 const file = fs.createWriteStream(londrinaSolid + '.ttf');
-const request = http.get('https://github.com/google/fonts/blob/master/ofl/' + londrinaSolid.toLowerCase() + '/' + londrinaSolid + '-Regular.ttf?raw=true', function(response)
+const request = https.get('https://github.com/google/fonts/blob/master/ofl/' + londrinaSolid.toLowerCase() + '/' + londrinaSolid + '-Regular.ttf?raw=true', function(response)
 {
 	response.pipe(file);
 	registerFont(londrinaSolid + '.ttf', { family: londrinaSolid });
