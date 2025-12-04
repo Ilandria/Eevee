@@ -128,7 +128,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillStyle = "white";
 		context.textAlign = "center";
 		context.shadowColor = "black";
-		context.shadowBlur = 10;
+		context.shadowBlur = 5;
 		context.textBaseline = "middle";
 
 		// Card name.
@@ -158,7 +158,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.cost.toString(), 150, canvas.height - 150);
 
 		// Card meta setup.
-		fontSize = 50;
+		fontSize = 35;
 		context.font = `${fontSize}px Garamond`;
 		context.textBaseline = "alphabetic";
 
@@ -175,6 +175,18 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Creator.
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75);
+
+		// Subtypes.
+		fontSize = 100;
+		context.font = `${fontSize}px Garamond`;
+		while (context.measureText(card.types).width > 900)
+		{
+			fontSize -= 5;
+			context.font = `${fontSize}px Garamond`;
+		};
+		context.textAlign = "center";
+		context.textBaseline = "hanging";
+		context.fillText(card.types, canvas.width / 2, 225);
 
 		// Finalize card.
 		statusCallback(`Sealing... ${coolAscii()}`);
