@@ -128,7 +128,8 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Finalize card.
 		const reply: DTO = new DTO();
-		const fileName = `${card.name}-${card.setCode}-${card.setNumber}`;
+		let fileName = `${card.name}-${card.setCode}-${card.setNumber}`;
+		fileName = fileName.trim().replace(/\s+/g, '-').toLowerCase();
 		reply.embed = new EmbedBuilder().setImage(`attachment://${fileName}.png`);
 		reply.attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {name: `${fileName}.png`});
 		return reply;
