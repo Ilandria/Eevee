@@ -102,29 +102,29 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 	private async buildCard(card: ChronicleCard, statusCallback: { (status: string): void; }): Promise<DTO>
 	{
 		// To do: All of this and the config section in configure() need to be moved out into a service somewhere. Guide here: https://www.youtube.com/watch?v=D1hWAIB6TWs
-		statusCallback(`${coolAscii()} Preparing rune...`);
+		statusCallback(`Preparing rune... ${coolAscii()}`);
 		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
 
 		// Background card art.
-		statusCallback(`${coolAscii()} Realizing rune art...`);
+		statusCallback(`Realizing rune art... ${coolAscii()}`);
 		const cardArt = await loadImage(card.artUrl);
 		context.drawImage(cardArt, 0, 0, canvas.width, canvas.height);
 
 		// Card rules background.
-		statusCallback(`${coolAscii()} Preparing inscription surface...`);
+		statusCallback(`Preparing inscription surface... ${coolAscii()}`);
 		const rulesBgUrl = await this.componentService.getRulesBgUrl();
 		const rulesBg = await loadImage(rulesBgUrl);
 		context.drawImage(rulesBg, 0, canvas.height / 2, canvas.width, canvas.height);
 
 		// Card frame.
-		statusCallback(`${coolAscii()} Etching tenets...`);
+		statusCallback(`$Etching tenets... ${coolAscii()}`);
 		const frameUrl = await this.componentService.getTenetFrameUrl(card.tenet);
 		const frame = await loadImage(frameUrl);
 		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
 		// General font setup.
-		statusCallback(`${coolAscii()} Scrawling rune words...`);
+		statusCallback(`Scrawling rune words... ${coolAscii()}`);
 		context.fillStyle = "white";
 		context.textAlign = "center";
 		context.shadowColor = "black";
@@ -139,17 +139,17 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 			fontSize -= 5;
 			context.font = `${fontSize}px Garamond`;
 		};
-		context.fillText(card.name, canvas.width / 2, 100);
+		context.fillText(card.name, canvas.width / 2, 110);
 
 		// Finalize card.
-		statusCallback(`${coolAscii()} Sealing...`);
+		statusCallback(`Sealing... ${coolAscii()}`);
 		const reply: DTO = new DTO();
 		let fileName = `${card.name}-${card.setCode}-${card.setNumber}`;
 		fileName = fileName.trim().replace(/\s+/g, '-').toLowerCase();
 		reply.embed = new EmbedBuilder().setImage(`attachment://${fileName}.png`);
 		reply.attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {name: `${fileName}.png`});
 
-		statusCallback(`Here you go! ${coolAscii()}`);
+		statusCallback(`Here's your rune! ${coolAscii()}`);
 		return reply;
 	}
 }
