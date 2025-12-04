@@ -177,9 +177,9 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75);
 
 		// Subtypes.
-		fontSize = 100;
+		fontSize = 75;
 		context.font = `${fontSize}px Garamond`;
-		while (context.measureText(card.types).width > 900)
+		while (context.measureText(card.types).width > 600)
 		{
 			fontSize -= 5;
 			context.font = `${fontSize}px Garamond`;
