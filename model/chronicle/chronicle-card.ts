@@ -18,8 +18,8 @@ export default class ChronicleCard
 	public rarity: number;
 	public id: number;
 
-	public getInfo(): string
+	public static getInfo(card: ChronicleCard): string
 	{
-		return `${this.name} (${this.setCode} #${this.setNumber} ${ChronicleRarity[this.rarity]}) (${ChronicleTenet[this.tenet]} ${ChronicleRune[this.rune]} ${this.types})`;
+		return `${this.name} (${card.setCode} #${card.setNumber} ${ChronicleRarity[card.rarity]}) (${ChronicleTenet[card.tenet]} ${ChronicleRune[card.rune]} ${card.types})`;
 	}
 }
