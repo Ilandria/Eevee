@@ -24,11 +24,17 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		this.componentService = componentService;
 
 		// Font config.
-		const file = fs.createWriteStream(this.londrinaSolidFile);
+		const outStream = fs.createWriteStream(this.londrinaSolidFile);
 		https.get(`https://github.com/google/fonts/blob/master/ofl/${this.londrinaSolid.toLowerCase()}/${this.londrinaSolid}-Regular.ttf?raw=true`, response =>
+		{
+			response.on('end', () =>
 			{
-				response.pipe(file).on('finish', () => registerFont(this.londrinaSolidFile, { family: this.londrinaSolid }));
+				outStream.end();
+				registerFont(this.londrinaSolidFile, { family: this.londrinaSolid });
 			});
+
+			response.pipe(outStream, { end: false });
+		});
 	}
 
 	/**
