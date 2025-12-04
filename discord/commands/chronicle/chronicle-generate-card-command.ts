@@ -147,6 +147,8 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		fileName = fileName.trim().replace(/\s+/g, '-').toLowerCase();
 		reply.embed = new EmbedBuilder().setImage(`attachment://${fileName}.png`);
 		reply.attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {name: `${fileName}.png`});
+
+		statusCallback(`${fileName}:`);
 		return reply;
 	}
 }
