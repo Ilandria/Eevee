@@ -15,7 +15,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 {
 	private componentService: ChronicleComponentService;
 	private readonly londrinaSolid = "LondrinaSolid";
-	private readonly londrinaSolidFile = `./${this.londrinaSolid}.otf`;
+	private readonly londrinaSolidFile = `./${this.londrinaSolid}.ttf`;
 
 	constructor(componentService: ChronicleComponentService)
 	{
