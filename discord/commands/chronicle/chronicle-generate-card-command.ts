@@ -1,9 +1,9 @@
-import ChronicleCardService from "../../../services/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 import { EmbedBuilder, AttachmentBuilder } from 'discord.js';
 import { createCanvas, Image, loadImage } from "canvas";
 import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
+import ChronicleComponentService from "../../../services/chronicle-component-service.js";
 
 /**
  * Says hello to the user! This is mostly a bare-bones example on how to set up commands.
@@ -11,13 +11,13 @@ import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
  */
 export default class ChronicleGenerateCardCommand extends DiscordCommand
 {
-	private cardService: ChronicleCardService;
+	private componentService: ChronicleComponentService;
 
-	constructor(cardService: ChronicleCardService)
+	constructor(componentService: ChronicleComponentService)
 	{
 		super();
 
-		this.cardService = cardService;
+		this.componentService = componentService;
 	}
 
 	/**
@@ -107,14 +107,19 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.drawImage(cardArt, 0, 0, canvas.width, canvas.height);
 
 		// Card rules background.
-		const rulesBg = await loadImage("https://drive.google.com/uc?export=view&id=1yGDaixOgH809_kV4W6REsiqn8HFa-cP6");
+		const rulesBgUrl = await this.componentService.getRulesBgUrl();
+		const rulesBg = await loadImage(rulesBgUrl);
 		context.drawImage(rulesBg, 0, canvas.height / 2, canvas.width, canvas.height);
 
 		// Card frame.
-		const frame = await loadImage("https://drive.google.com/uc?export=view&id=1cYI3Vc1K362xJpBdu0OgHy12wSxJ71sm");
+		const frameUrl = await this.componentService.getTenetFrameUrl(card.tenet);
+		const frame = await loadImage(frameUrl);
 		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
 		// All card text & iconography.
+		context.fillStyle = "black";
+		context.font = "40px";
+		context.fillText(card.name, canvas.width / 2, 200);
 
 		// Finalize card.
 		const reply: DTO = new DTO();

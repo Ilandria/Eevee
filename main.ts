@@ -10,6 +10,7 @@ import PostgresClient from './services/postgres-client.js';
 import EveWebClient from './eve/eve-web-client.js';
 import generateEveWebRequests from './eve/eve-web-requests.js';
 import ChronicleCardService from "./services/chronicle-card-service.js";
+import ChronicleComponentService from "./services/chronicle-component-service.js";
 
 const container = new Container();
 
@@ -20,10 +21,12 @@ container.add('database', postgres);
 // Chronicle config.
 const cardService = new ChronicleCardService(postgres);
 container.add('chronicleCardService', cardService);
+const componentService = new ChronicleComponentService(postgres);
+container.add('chronicleComponentService', componentService);
 
 // Discord config.
 const disc = new DiscordClient();
-disc.addCommands(generateDiscordCommands(cardService));
+disc.addCommands(generateDiscordCommands(cardService, componentService));
 disc.login(process.env.DISCORD_TOKEN);
 container.add('discord', disc);
 

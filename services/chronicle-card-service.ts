@@ -15,7 +15,7 @@ export default class ChronicleCardService
 
 	public async getAllCards(): Promise<ChronicleCard[]>
 	{
-		const result = await this.databaseService.query('SELECT * FROM "eve-static".cards ORDER BY id ASC');
+		const result = await this.databaseService.query<object>('SELECT * FROM "eve-static".cards ORDER BY id ASC');
 		const cards: ChronicleCard[] = result.map(cardData => Object.assign(new ChronicleCard(), cardData));
 		return cards;
 	}
@@ -31,7 +31,7 @@ export default class ChronicleCardService
 
 		query += 'ORDER by id ASC;';
 
-		const result = await this.databaseService.query(query);
+		const result = await this.databaseService.query<object>(query);
 		const cards: ChronicleCard[] = result.map(cardData => Object.assign(new ChronicleCard(), cardData));
 
 		return cards;
