@@ -15,7 +15,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 {
 	private componentService: ChronicleComponentService;
 	private readonly londrinaSolid = "LondrinaSolid";
-	private readonly londrinaSolidFile = `./${this.londrinaSolid}.ttf`;
+	private readonly londrinaSolidFile = `./${this.londrinaSolid}.otf`;
 
 	constructor(componentService: ChronicleComponentService)
 	{
@@ -30,7 +30,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 			response.on('end', () =>
 			{
 				outStream.end();
-				registerFont(this.londrinaSolidFile, { family: this.londrinaSolid });
+				registerFont(this.londrinaSolidFile, { family: "Londrina Solid" });
 			});
 
 			response.pipe(outStream, { end: false });
@@ -135,7 +135,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = `130px "${this.londrinaSolid}"`;
+		context.font = `130px "Londrina Solid"`;
 		context.textAlign = "center";
 		context.shadowColor = "black";
 		context.shadowBlur = 10;
