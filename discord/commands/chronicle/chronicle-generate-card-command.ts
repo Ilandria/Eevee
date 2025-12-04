@@ -132,17 +132,11 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.textBaseline = "middle";
 
 		// Card name.
-		let fontSize = 130;
+		let fontSize = 150;
 		context.font = `${fontSize}px Garamond`;
-		while (context.measureText(card.name).width > 900)
-		{
-			fontSize -= 5;
-			context.font = `${fontSize}px Garamond`;
-		};
-		context.fillText(card.name, canvas.width / 2, 110);
+		context.fillText(card.name, canvas.width / 2, 110, 900);
 
 		// Card stat setup.
-		fontSize = 130;
 		context.font = `${fontSize}px Garamond`;
 
 		// Rune.
@@ -158,7 +152,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.cost.toString(), 150, canvas.height - 150);
 
 		// Card meta setup.
-		fontSize = 25;
+		fontSize = 30;
 		context.font = `${fontSize}px Garamond`;
 		context.textBaseline = "alphabetic";
 
@@ -177,16 +171,11 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75);
 
 		// Subtypes.
-		fontSize = 70;
+		fontSize = 60;
 		context.font = `${fontSize}px Garamond`;
-		while (context.measureText(card.types).width > 600)
-		{
-			fontSize -= 5;
-			context.font = `${fontSize}px Garamond`;
-		};
 		context.textAlign = "center";
 		context.textBaseline = "hanging";
-		context.fillText(card.types, canvas.width / 2, 225);
+		context.fillText(card.types, canvas.width / 2, 215, 600);
 
 		// Finalize card.
 		statusCallback(`Sealing... ${coolAscii()}`);
