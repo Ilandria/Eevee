@@ -4,6 +4,7 @@ import { createCanvas, Image, loadImage, registerFont } from "canvas";
 import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import ChronicleComponentService from "../../../services/chronicle-component-service.js";
+import coolAscii from 'cool-ascii-faces';
 import https from 'https';
 import fs from 'fs';
 
@@ -101,29 +102,29 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 	private async buildCard(card: ChronicleCard, statusCallback: { (status: string): void; }): Promise<DTO>
 	{
 		// To do: All of this and the config section in configure() need to be moved out into a service somewhere. Guide here: https://www.youtube.com/watch?v=D1hWAIB6TWs
-		statusCallback("Preparing rune...");
+		statusCallback(`${coolAscii()} Preparing rune...`);
 		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
 
 		// Background card art.
-		statusCallback("Realizing rune art...");
+		statusCallback(`${coolAscii()} Realizing rune art...`);
 		const cardArt = await loadImage(card.artUrl);
 		context.drawImage(cardArt, 0, 0, canvas.width, canvas.height);
 
 		// Card rules background.
-		statusCallback("Preparing inscription surface...");
+		statusCallback(`${coolAscii()} Preparing inscription surface...`);
 		const rulesBgUrl = await this.componentService.getRulesBgUrl();
 		const rulesBg = await loadImage(rulesBgUrl);
 		context.drawImage(rulesBg, 0, canvas.height / 2, canvas.width, canvas.height);
 
 		// Card frame.
-		statusCallback("Etching tenets...");
+		statusCallback(`${coolAscii()} Etching tenets...`);
 		const frameUrl = await this.componentService.getTenetFrameUrl(card.tenet);
 		const frame = await loadImage(frameUrl);
 		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
 		// General font setup.
-		statusCallback("Scrawling rune words...");
+		statusCallback(`${coolAscii()} Scrawling rune words...`);
 		context.fillStyle = "white";
 		context.textAlign = "center";
 		context.shadowColor = "black";
@@ -141,14 +142,14 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.name, canvas.width / 2, 100);
 
 		// Finalize card.
-		statusCallback("Sealing...");
+		statusCallback(`${coolAscii()} Sealing...`);
 		const reply: DTO = new DTO();
 		let fileName = `${card.name}-${card.setCode}-${card.setNumber}`;
 		fileName = fileName.trim().replace(/\s+/g, '-').toLowerCase();
 		reply.embed = new EmbedBuilder().setImage(`attachment://${fileName}.png`);
 		reply.attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {name: `${fileName}.png`});
 
-		statusCallback(`${fileName}:`);
+		statusCallback(`Here you go! ${coolAscii()}`);
 		return reply;
 	}
 }
