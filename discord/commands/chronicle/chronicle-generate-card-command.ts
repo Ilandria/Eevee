@@ -118,7 +118,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.drawImage(rulesBg, 0, canvas.height / 2, canvas.width, canvas.height);
 
 		// Card frame.
-		statusCallback(`$Etching tenets... ${coolAscii()}`);
+		statusCallback(`Etching tenets... ${coolAscii()}`);
 		const frameUrl = await this.componentService.getTenetFrameUrl(card.tenet);
 		const frame = await loadImage(frameUrl);
 		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
@@ -128,7 +128,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillStyle = "white";
 		context.textAlign = "center";
 		context.shadowColor = "black";
-		context.shadowBlur = 10;
+		context.shadowBlur = 20;
 		context.textBaseline = "middle";
 
 		// Card name.
