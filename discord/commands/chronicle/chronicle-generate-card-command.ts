@@ -128,7 +128,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillStyle = "white";
 		context.textAlign = "center";
 		context.shadowColor = "black";
-		context.shadowBlur = 20;
+		context.shadowBlur = 10;
 		context.textBaseline = "middle";
 
 		// Card name.
@@ -140,6 +140,22 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 			context.font = `${fontSize}px Garamond`;
 		};
 		context.fillText(card.name, canvas.width / 2, 110);
+
+		// Card stat setup.
+		fontSize = 130;
+		context.font = `${fontSize}px Garamond`;
+
+		// Rune.
+		context.fillText(ChronicleRune[card.rune].at(0), 150, 150);
+
+		// Attack.
+		if (card.attack) context.fillText(card.attack.toString(), canvas.width - 150, 150);
+
+		// Defense.
+		if (card.defense) context.fillText(card.defense.toString(), canvas.width - 150, canvas.height - 150);
+
+		// Cost.
+		context.fillText(card.cost.toString(), 150, canvas.height - 150);
 
 		// Finalize card.
 		statusCallback(`Sealing... ${coolAscii()}`);
