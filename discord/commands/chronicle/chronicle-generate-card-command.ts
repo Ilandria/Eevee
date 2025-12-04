@@ -117,7 +117,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		const rulesBg = await loadImage(rulesBgUrl);
 		context.font = `50px Garamond`;
 		const lines: string[] = this.getLinesForParagraphs(context, card.rules, 900); // Need to get text early to know how high to draw the background.
-		context.drawImage(rulesBg, 0, canvas.height - (375 + 65 * lines.length), canvas.width, canvas.height);
+		context.drawImage(rulesBg, 0, canvas.height - (412.5 + 65 * lines.length), canvas.width, canvas.height);
 
 		// Card frame.
 		statusCallback(`Etching tenets... ${coolAscii()}`);
@@ -135,7 +135,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Card name.
 		context.font = `normal 900 100px Garamond`;
-		context.fillText(card.name, canvas.width / 2, 112.5, 900);
+		context.fillText(card.name, canvas.width / 2, 75, 900);
 
 		// Rune.
 		context.fillText(`${card.rune as ChronicleRune}`.at(0), 150, 150);
@@ -151,7 +151,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// Subtypes.
 		context.font = `normal 600 50px Garamond`;
-		context.fillText(card.types.toLowerCase(), canvas.width / 2, 187.5, 600);
+		context.fillText(card.types.toLowerCase(), canvas.width / 2, 112.5, 600);
 
 		// Card meta setup.
 		context.font = `30px Garamond`;
@@ -174,7 +174,6 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		// Rules.
 		context.font = `50px Garamond`;
 		context.textAlign = "left";
-
 		for (let i: number = 0; i < lines.length; i++)
 		{
 			context.fillText(lines[i], 300, canvas.height - (300 + 65 * (lines.length - i - 1)), 900);
