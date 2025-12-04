@@ -118,13 +118,22 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		const frame = await loadImage(frameUrl);
 		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-		// All card text & iconography.
+		// General font setup.
 		context.fillStyle = "white";
-		context.font = `130px Garamond`;
 		context.textAlign = "center";
 		context.shadowColor = "black";
-		context.shadowBlur = 5;
-		context.fillText(card.name, canvas.width / 2, 150);
+		context.shadowBlur = 10;
+		context.textBaseline = "middle";
+
+		// Card name.
+		let fontSize = 130;
+		context.font = `${fontSize}px Garamond`;
+		while (context.measureText(card.name).width > 900)
+		{
+			fontSize -= 5;
+			context.font = `${fontSize}px Garamond`;
+		}
+		context.fillText(card.name, canvas.width / 2, 100);
 
 		// Finalize card.
 		const reply: DTO = new DTO();
