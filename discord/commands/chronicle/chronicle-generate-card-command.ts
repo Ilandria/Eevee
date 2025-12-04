@@ -118,8 +118,8 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = '40pt "LondrinaSolid" textAlign=center';
-		context.fillText(card.name, canvas.width / 2, 180);
+		context.font = '400pt "LondrinaSolid" textAlign=center';
+		context.fillText(card.name, canvas.width / 2, 160);
 
 		// Finalize card.
 		const reply: DTO = new DTO();
