@@ -18,13 +18,10 @@ import fs from 'fs';
 const container = new Container();
 
 // Canvas.
-const londrinaSolid = "LondrinaSolid"
-const file = fs.createWriteStream(londrinaSolid + '.ttf');
-const request = https.get('https://github.com/google/fonts/blob/master/ofl/' + londrinaSolid.toLowerCase() + '/' + londrinaSolid + '-Regular.ttf?raw=true', function(response)
-{
-	response.pipe(file);
-	registerFont(londrinaSolid + '.ttf', { family: londrinaSolid });
-});
+const londrinaSolid = "LondrinaSolid";
+const fontFile = `./${londrinaSolid}.ttf`;
+const file = fs.createWriteStream(fontFile).on('end', () => registerFont(fontFile, { family: londrinaSolid }));
+https.get(`https://github.com/google/fonts/blob/master/ofl/${londrinaSolid.toLowerCase()}/${londrinaSolid}-Regular.ttf?raw=true`, response => response.pipe(file));
 
 // Postgres config.
 const postgres = new PostgresClient();
