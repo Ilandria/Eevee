@@ -4,6 +4,8 @@ import { createCanvas, Image, loadImage, registerFont } from "canvas";
 import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import ChronicleComponentService from "../../../services/chronicle-component-service.js";
+import https from 'https';
+import fs from 'fs';
 
 /**
  * Says hello to the user! This is mostly a bare-bones example on how to set up commands.
@@ -12,12 +14,18 @@ import ChronicleComponentService from "../../../services/chronicle-component-ser
 export default class ChronicleGenerateCardCommand extends DiscordCommand
 {
 	private componentService: ChronicleComponentService;
+	private readonly londrinaSolid = "LondrinaSolid";
+	private readonly londrinaSolidFile = `./${this.londrinaSolid}.ttf`;
 
 	constructor(componentService: ChronicleComponentService)
 	{
 		super();
 
 		this.componentService = componentService;
+
+		// Font config.
+		const file = fs.createWriteStream(this.londrinaSolidFile).on('end', () => registerFont(this.londrinaSolidFile, { family: this.londrinaSolid }));
+		https.get(`https://github.com/google/fonts/blob/master/ofl/${this.londrinaSolid.toLowerCase()}/${this.londrinaSolid}-Regular.ttf?raw=true`, response => response.pipe(file));
 	}
 
 	/**
@@ -98,8 +106,6 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 	private async buildCard(card: ChronicleCard): Promise<DTO>
 	{
-		registerFont("./LondrinaSolid.ttf", { family: "LondrinaSolid" });
-
 		// To do: All of this and the config section in configure() need to be moved out into a service somewhere. Guide here: https://www.youtube.com/watch?v=D1hWAIB6TWs
 		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
@@ -120,7 +126,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = "150px LondrinaSolid";
+		context.font = `150px ${this.londrinaSolid}`;
 		context.textAlign = "center";
 		context.shadowColor = "black";
 		context.shadowBlur = 10;

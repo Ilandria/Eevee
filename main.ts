@@ -11,17 +11,8 @@ import EveWebClient from './eve/eve-web-client.js';
 import generateEveWebRequests from './eve/eve-web-requests.js';
 import ChronicleCardService from "./services/chronicle-card-service.js";
 import ChronicleComponentService from "./services/chronicle-component-service.js";
-import { registerFont } from "canvas";
-import https from 'https';
-import fs from 'fs';
 
 const container = new Container();
-
-// Canvas.
-const londrinaSolid = "LondrinaSolid";
-const fontFile = `./${londrinaSolid}.ttf`;
-const file = fs.createWriteStream(fontFile).on('end', () => registerFont(fontFile, { family: londrinaSolid }));
-https.get(`https://github.com/google/fonts/blob/master/ofl/${londrinaSolid.toLowerCase()}/${londrinaSolid}-Regular.ttf?raw=true`, response => response.pipe(file));
 
 // Postgres config.
 const postgres = new PostgresClient();
