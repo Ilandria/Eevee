@@ -15,8 +15,8 @@ export default class ChronicleComponentService
 
 	public async getTenetFrameUrl(tenet: ChronicleTenet): Promise<string>
 	{
-		const tenetLower: string = (ChronicleTenet[tenet] as string).toLowerCase();
-		const result = await this.databaseService.query<DTO>(`SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'frame-${tenetLower}'`);
+		const tenetName: string = ChronicleTenet[tenet] as string;
+		const result = await this.databaseService.query<DTO>(`SELECT * FROM "eve-static"."card-frame-components" WHERE component = 'frame-${tenetName.toLowerCase()}'`);
 		return result[0].url;
 	}
 
