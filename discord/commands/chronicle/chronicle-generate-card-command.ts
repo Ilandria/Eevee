@@ -14,27 +14,12 @@ import fs from 'fs';
 export default class ChronicleGenerateCardCommand extends DiscordCommand
 {
 	private componentService: ChronicleComponentService;
-	private readonly londrinaSolid = "LondrinaSolid";
-	private readonly londrinaSolidFile = `./${this.londrinaSolid}.ttf`;
 
 	constructor(componentService: ChronicleComponentService)
 	{
 		super();
 
 		this.componentService = componentService;
-
-		// Font config.
-		const outStream = fs.createWriteStream(this.londrinaSolidFile);
-		https.get(`https://github.com/google/fonts/blob/master/ofl/${this.londrinaSolid.toLowerCase()}/${this.londrinaSolid}-Regular.ttf?raw=true`, response =>
-		{
-			response.on('end', () =>
-			{
-				outStream.end();
-				registerFont(this.londrinaSolidFile, { family: "Londrina Solid" });
-			});
-
-			response.pipe(outStream, { end: false });
-		});
 	}
 
 	/**
@@ -135,10 +120,10 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = `130px "Londrina Solid"`;
+		context.font = `130px Garamond`;
 		context.textAlign = "center";
 		context.shadowColor = "black";
-		context.shadowBlur = 10;
+		context.shadowBlur = 5;
 		context.fillText(card.name, canvas.width / 2, 150);
 
 		// Finalize card.
