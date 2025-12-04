@@ -156,15 +156,19 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		// Collection.
 		context.textAlign = "left";
 		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5, 225);
+		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5, 225);
 
 		// Artist.
+		context.fillText(card.artist, 337.5, canvas.height - 75, 225);
 		context.fillText(card.artist, 337.5, canvas.height - 75, 225);
 
 		// Copyright.
 		context.textAlign = "right";
 		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5, 225);
+		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5, 225);
 
 		// Creator.
+		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 
 		// Subtypes.
