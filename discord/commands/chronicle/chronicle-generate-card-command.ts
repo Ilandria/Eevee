@@ -1,6 +1,6 @@
 import DiscordCommand from '../../discord-command.js';
 import { EmbedBuilder, AttachmentBuilder } from 'discord.js';
-import { createCanvas, Image, loadImage } from "canvas";
+import { createCanvas, Image, loadImage, registerFont } from "canvas";
 import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import ChronicleComponentService from "../../../services/chronicle-component-service.js";
@@ -98,6 +98,8 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 	private async buildCard(card: ChronicleCard): Promise<DTO>
 	{
+		registerFont("./LondrinaSolid.ttf", { family: "LondrinaSolid" });
+
 		// To do: All of this and the config section in configure() need to be moved out into a service somewhere. Guide here: https://www.youtube.com/watch?v=D1hWAIB6TWs
 		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
@@ -118,7 +120,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 
 		// All card text & iconography.
 		context.fillStyle = "white";
-		context.font = "300px LondrinaSolid";
+		context.font = "150px LondrinaSolid";
 		context.textAlign = "center";
 		context.shadowColor = "black";
 		context.shadowBlur = 10;
