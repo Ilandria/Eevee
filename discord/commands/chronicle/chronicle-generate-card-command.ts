@@ -148,13 +148,13 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.cost.toString(), 150, canvas.height - 150);
 
 		// Subtypes.
-		context.font = `normal 900 60px Garamond`;
+		context.font = `normal 900 50px Garamond`;
 		context.textAlign = "center";
 		context.textBaseline = "hanging";
-		context.fillText(card.types.toUpperCase(), canvas.width / 2, 215, 600);
+		context.fillText(card.types.toUpperCase(), canvas.width / 2, 215, 450);
 
 		// Card meta setup.
-		context.font = `30px Garamond`;
+		context.font = `35px Garamond`;
 		context.textBaseline = "alphabetic";
 
 		// Collection.
