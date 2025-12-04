@@ -134,7 +134,7 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.textBaseline = "middle";
 
 		// Card name.
-		context.font = `normal 900 100px Garamond`;
+		context.font = `normal 900 80px Garamond`;
 		context.fillText(card.name, canvas.width / 2, 93.75, 900);
 
 		// Rune.
@@ -150,8 +150,8 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 		context.fillText(card.cost.toString(), 150, canvas.height - 150);
 
 		// Subtypes.
-		context.font = `normal 600 50px Garamond`;
-		context.fillText(card.types.toLowerCase(), canvas.width / 2, 150, 600);
+		context.font = `normal 600 40px Garamond`;
+		context.fillText(card.types.toLowerCase(), canvas.width / 2, 168.75, 600);
 
 		// Card meta setup.
 		context.font = `30px Garamond`;
