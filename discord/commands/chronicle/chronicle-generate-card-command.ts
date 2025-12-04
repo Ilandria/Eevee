@@ -1,7 +1,9 @@
 import ChronicleCardService from "../../../services/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 import { EmbedBuilder, AttachmentBuilder } from 'discord.js';
-import { createCanvas, Image } from "canvas";
+import { createCanvas, Image, loadImage } from "canvas";
+import { ChronicleRarity, ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
+import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 
 /**
  * Says hello to the user! This is mostly a bare-bones example on how to set up commands.
@@ -26,6 +28,41 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 	{
 		this.config.setName('chron-gen-card');
 		this.config.setDescription('Generate a high res Chronicle card from the Chronicle DB or given info.');
+		this.config.addStringOption((option) => option.setName('name').setDescription('The name of the card.').setRequired(true));
+		this.config.addStringOption((option) => option.setName('cost').setDescription('The myst cost of the card.').setRequired(true));
+		this.config.addStringOption((option) =>	option.setName('rune').setDescription("The card's rune.").setRequired(true).addChoices(
+			{ name: ChronicleRune[ChronicleRune.Herald], value: ChronicleRune[ChronicleRune.Herald] },
+			{ name: ChronicleRune[ChronicleRune.Source], value: ChronicleRune[ChronicleRune.Source] },
+			{ name: ChronicleRune[ChronicleRune.Form], value: ChronicleRune[ChronicleRune.Form] },
+			{ name: ChronicleRune[ChronicleRune.Ritual], value: ChronicleRune[ChronicleRune.Ritual] },
+			{ name: ChronicleRune[ChronicleRune.Burst], value: ChronicleRune[ChronicleRune.Burst] },
+			{ name: ChronicleRune[ChronicleRune.Aura], value: ChronicleRune[ChronicleRune.Aura] },
+			{ name: ChronicleRune[ChronicleRune.None], value: ChronicleRune[ChronicleRune.None] }));
+			this.config.addStringOption((option) =>	option.setName('tenet').setDescription("The card's tenet.").setRequired(true).addChoices(
+			{ name: ChronicleTenet[ChronicleTenet.Well], value: ChronicleTenet[ChronicleTenet.Well] },
+			{ name: ChronicleTenet[ChronicleTenet.Torch], value: ChronicleTenet[ChronicleTenet.Torch] },
+			{ name: ChronicleTenet[ChronicleTenet.Cloak], value: ChronicleTenet[ChronicleTenet.Cloak] },
+			{ name: ChronicleTenet[ChronicleTenet.Shield], value: ChronicleTenet[ChronicleTenet.Shield] },
+			{ name: ChronicleTenet[ChronicleTenet.Guile], value: ChronicleTenet[ChronicleTenet.Guile] },
+			{ name: ChronicleTenet[ChronicleTenet.Valour], value: ChronicleTenet[ChronicleTenet.Valour] },
+			{ name: ChronicleTenet[ChronicleTenet.Insight], value: ChronicleTenet[ChronicleTenet.Insight] },
+			{ name: ChronicleTenet[ChronicleTenet.Fount], value: ChronicleTenet[ChronicleTenet.Fount] },
+			{ name: ChronicleTenet[ChronicleTenet.None], value: ChronicleTenet[ChronicleTenet.None] }));
+			this.config.addStringOption((option) => option.setName('art').setDescription("URL pointing to the card art (must be 1500 x 2100)."));
+		this.config.addStringOption((option) =>	option.setName('rarity').setDescription("The card's rarity.").addChoices(
+			{ name: ChronicleRarity[ChronicleRarity.Common], value: ChronicleRarity[ChronicleRarity.Common] },
+			{ name: ChronicleRarity[ChronicleRarity.Uncommon], value: ChronicleRarity[ChronicleRarity.Uncommon] },
+			{ name: ChronicleRarity[ChronicleRarity.Rare], value: ChronicleRarity[ChronicleRarity.Rare] },
+			{ name: ChronicleRarity[ChronicleRarity.Special], value: ChronicleRarity[ChronicleRarity.Special] },
+			{ name: ChronicleRarity[ChronicleRarity.None], value: ChronicleRarity[ChronicleRarity.None] }));
+		this.config.addStringOption((option) => option.setName('types').setDescription("The card's types."));
+		this.config.addStringOption((option) => option.setName('attack').setDescription("The card's attack."));
+		this.config.addStringOption((option) => option.setName('defense').setDescription("The card's defense."));
+		this.config.addStringOption((option) => option.setName('rules').setDescription("The card's rules text."));
+		this.config.addStringOption((option) => option.setName('set-number').setDescription("The card's set number."));
+		this.config.addStringOption((option) => option.setName('set-code').setDescription("The card's set code."));
+		this.config.addStringOption((option) => option.setName('artist').setDescription("The card artist's name or handle."));
+		this.config.addStringOption((option) => option.setName('copyright').setDescription("Extra copyright info for the card."));
 	}
 
 	/**
@@ -36,23 +73,60 @@ export default class ChronicleGenerateCardCommand extends DiscordCommand
 	{
 		await interaction.deferReply();
 
+		const card: ChronicleCard = Object.assign(new ChronicleCard(),
+		{
+			name: interaction.options.getString('name'),
+			artUrl: interaction.options.getString('art') ?? "https://drive.google.com/uc?export=view&id=1HYDAkaJ0q_f3uq3nxtv3Z2sQvqKP8Sm7",
+			artist: interaction.options.getString('artist'),
+			copyright: interaction.options.getString('copyright'),
+			setCode: interaction.options.getString('set-code'),
+			setNumber: interaction.options.getString('set-number'),
+			rune: interaction.options.getString('rune'),
+			types: interaction.options.getString('types'),
+			tenet: interaction.options.getString('tenet'),
+			cost: interaction.options.getString('cost'),
+			attack: interaction.options.getString('attack'),
+			defense: interaction.options.getString('defense'),
+			rules: interaction.options.getString('rules'),
+			rarity: interaction.options.getString('rarity'),
+			id: -1
+		});
+
+		const reply: DTO = await this.buildCard(card);
+		await interaction.editReply({embeds: [reply.embed], files: [reply.attachment]});
+	}
+
+	private async buildCard(card: ChronicleCard): Promise<DTO>
+	{
+		// To do: All of this and the config section in configure() need to be moved out into a service somewhere. Guide here: https://www.youtube.com/watch?v=D1hWAIB6TWs
 		const canvas = createCanvas(1500, 2100);
 		const context = canvas.getContext("2d");
-		context.fillStyle = "white";
-		context.fillRect(0, 0, canvas.width, canvas.height);
-		const cardArt = new Image();
-		cardArt.src = "https://drive.google.com/uc?export=view&id=12Y4POh8iC9mf-jAGpSbU3DRfMa8K9HFQ";
 
-		cardArt.onload = async function ()
-		{
-			context.drawImage(cardArt, 0, 0, cardArt.width, cardArt.height);
+		// Background card art.
+		const cardArt = await loadImage(card.artUrl);
+		context.drawImage(cardArt, 0, 0, canvas.width, canvas.height);
 
-			const buffer = canvas.toBuffer("image/png");
-			const attachment = new AttachmentBuilder(buffer, {name: "card.png"});
+		// Card rules background.
+		const rulesBg = await loadImage("https://drive.google.com/uc?export=view&id=1yGDaixOgH809_kV4W6REsiqn8HFa-cP6");
+		context.drawImage(rulesBg, 0, canvas.height / 2, canvas.width, canvas.height);
 
-			const embed = new EmbedBuilder().setImage("attachment://card.png")
+		// Card frame.
+		const frame = await loadImage("https://drive.google.com/uc?export=view&id=1cYI3Vc1K362xJpBdu0OgHy12wSxJ71sm");
+		context.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
-			await interaction.editReply({embeds: [embed], files: [attachment]});
-		};
+		// All card text & iconography.
+
+		// Finalize card.
+		const reply: DTO = new DTO();
+		const fileName = `${card.name}-${card.setCode}-${card.setNumber}`;
+		reply.embed = new EmbedBuilder().setImage(`attachment://${fileName}.png`);
+		reply.attachment = new AttachmentBuilder(canvas.toBuffer("image/png"), {name: `${fileName}.png`});
+		return reply;
 	}
+}
+
+class DTO
+{
+	public embed: EmbedBuilder;
+	public attachment: AttachmentBuilder;
 }
