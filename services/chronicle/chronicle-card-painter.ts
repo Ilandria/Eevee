@@ -53,13 +53,13 @@ export default class ChronicleCardPainter
 		this.drawText(`${ChronicleRune[card.rune]}`.at(0), context, 120, 150, 150, 300, "center", 600, "middle");
 
 		// Attack.
-		if (card.attack) this.drawText(card.attack.toString(), context, 120, canvas.width - 150, 150, 300, "center", 600, "middle");
+		if (card.attack >= 0) this.drawText(card.attack.toString(), context, 120, canvas.width - 150, 150, 300, "center", 600, "middle");
 
 		// Defense.
-		if (card.defense) this.drawText(card.defense.toString(), context, 120, canvas.width - 150, canvas.height - 150, 300, "center", 600, "middle");
+		if (card.defense >= 0) this.drawText(card.defense.toString(), context, 120, canvas.width - 150, canvas.height - 150, 300, "center", 600, "middle");
 
 		// Cost.
-		if (card.cost) this.drawText(card.cost.toString(), context, 120, 150, canvas.height - 150, 300, "center", 600, "middle");
+		if (card.cost >= 0) this.drawText(card.cost.toString(), context, 120, 150, canvas.height - 150, 300, "center", 600, "middle");
 
 		// Subtypes.
 		this.drawText(card.types.toUpperCase(), context, 40, canvas.width / 2, 155, 600, "center", 400, "middle");
