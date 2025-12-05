@@ -10,6 +10,7 @@ export default class ChronicleCardPainter
 {
 	private componentService: ChronicleComponentService;
 	private static readonly rulesLineSpacing: number = 60;
+	private static readonly rulesFontSize: number = 40;
 
 	constructor(componentService: ChronicleComponentService)
 	{
@@ -32,7 +33,7 @@ export default class ChronicleCardPainter
 		statusCallback(`Preparing inscription surface... ${coolAscii()}`);
 		const rulesBgUrl = await this.componentService.getRulesBgUrl();
 		const rulesBg = await loadImage(rulesBgUrl);
-		context.font = `50px Garamond`;
+		context.font = `${ChronicleCardPainter.rulesFontSize}px Garamond`;
 		const lines: string[] = this.getLinesForParagraphs(context, card.rules, 900); // Need to get text early to know how high to draw the background.
 		context.drawImage(rulesBg, 0, canvas.height - (393.75 + ChronicleCardPainter.rulesLineSpacing * lines.length), canvas.width, canvas.height);
 
@@ -56,7 +57,7 @@ export default class ChronicleCardPainter
 
 		// Rune.
 		context.font = `normal 600 120px Garamond`;
-		context.fillText(`${card.rune as ChronicleRune}`.at(0), 150, 150);
+		context.fillText(`${ChronicleRune[card.rune]}`.at(0), 150, 150);
 
 		// Attack.
 		if (card.attack) context.fillText(card.attack.toString(), canvas.width - 150, 150);
@@ -90,7 +91,7 @@ export default class ChronicleCardPainter
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 
 		// Rules.
-		context.font = `40px Garamond`;
+		context.font = `${ChronicleCardPainter.rulesFontSize}px Garamond`;
 		context.textAlign = "left";
 		for (let i: number = 0; i < lines.length; i++)
 		{
