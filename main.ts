@@ -9,8 +9,9 @@ import generateDiscordCommands from './discord/discord-commands.js';
 import PostgresClient from './services/postgres-client.js';
 import EveWebClient from './eve/eve-web-client.js';
 import generateEveWebRequests from './eve/eve-web-requests.js';
-import ChronicleCardService from "./services/chronicle-card-service.js";
-import ChronicleComponentService from "./services/chronicle-component-service.js";
+import ChronicleCardService from "./services/chronicle/chronicle-card-service.js";
+import ChronicleComponentService from "./services/chronicle/chronicle-component-service.js";
+import ChronicleCardPainter from "./services/chronicle/chronicle-card-painter.js";
 
 const container = new Container();
 
@@ -23,10 +24,12 @@ const cardService = new ChronicleCardService(postgres);
 container.add('chronicleCardService', cardService);
 const componentService = new ChronicleComponentService(postgres);
 container.add('chronicleComponentService', componentService);
+const cardPainter = new ChronicleCardPainter(componentService);
+container.add('chronicleCardPainter', cardPainter);
 
 // Discord config.
 const disc = new DiscordClient();
-disc.addCommands(generateDiscordCommands(cardService, componentService));
+disc.addCommands(generateDiscordCommands(cardService, cardPainter));
 disc.login(process.env.DISCORD_TOKEN);
 container.add('discord', disc);
 

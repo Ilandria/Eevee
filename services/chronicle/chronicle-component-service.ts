@@ -1,5 +1,5 @@
-import { ChronicleTenet } from "../model/chronicle/chronicle-enums.js";
-import PostgresClient from "./postgres-client.js";
+import { ChronicleTenet } from "../../model/chronicle/chronicle-enums.js";
+import PostgresClient from "../postgres-client.js";
 
 /**
  * Card database service for Chronicle.

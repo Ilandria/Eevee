@@ -1,6 +1,6 @@
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
 import { ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
-import ChronicleCardService from "../../../services/chronicle-card-service.js";
+import ChronicleCardService from "../../../services/chronicle/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 
 /**

@@ -8,7 +8,7 @@ import generateDiscordCommands from '../../build/discord/discord-commands.js';
 const commands = generateDiscordCommands().map(command => command.config.toJSON());
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 
-(async () => {
+(async () =>{
 	try
 	{
 		console.log(`DISCORD | Started refreshing ${commands.length} commands.`);

@@ -1,5 +1,5 @@
-import ChronicleCard from "../model/chronicle/chronicle-card.js";
-import PostgresClient from "./postgres-client.js";
+import ChronicleCard from "../../model/chronicle/chronicle-card.js";
+import PostgresClient from "../postgres-client.js";
 
 /**
  * Card database service for Chronicle.
