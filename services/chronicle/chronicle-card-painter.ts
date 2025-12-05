@@ -9,6 +9,7 @@ import ChronicleComponentService from "./chronicle-component-service.js";
 export default class ChronicleCardPainter
 {
 	private componentService: ChronicleComponentService;
+	private static readonly rulesLineSpacing: number = 60;
 
 	constructor(componentService: ChronicleComponentService)
 	{
@@ -33,7 +34,7 @@ export default class ChronicleCardPainter
 		const rulesBg = await loadImage(rulesBgUrl);
 		context.font = `50px Garamond`;
 		const lines: string[] = this.getLinesForParagraphs(context, card.rules, 900); // Need to get text early to know how high to draw the background.
-		context.drawImage(rulesBg, 0, canvas.height - (393.75 + 65 * lines.length), canvas.width, canvas.height);
+		context.drawImage(rulesBg, 0, canvas.height - (393.75 + ChronicleCardPainter.rulesLineSpacing * lines.length), canvas.width, canvas.height);
 
 		// Card frame.
 		statusCallback(`Etching tenets... ${coolAscii()}`);
@@ -93,7 +94,7 @@ export default class ChronicleCardPainter
 		context.textAlign = "left";
 		for (let i: number = 0; i < lines.length; i++)
 		{
-			context.fillText(lines[i], 300, canvas.height - (300 + 65 * (lines.length - i - 1)), 900);
+			context.fillText(lines[i], 300, canvas.height - (300 + ChronicleCardPainter.rulesLineSpacing * (lines.length - i - 1)), 900);
 		}
 
 		// Finalize card.
