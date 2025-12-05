@@ -26,7 +26,7 @@ export default class ChronicleCardPainter
 
 		// Background card art.
 		statusCallback(`Realizing rune art... ${coolAscii()}`);
-		const cardArt = await loadImage(card.artUrl);
+		const cardArt = await loadImage(card.artUrl ?? "https://drive.google.com/uc?export=view&id=1HYDAkaJ0q_f3uq3nxtv3Z2sQvqKP8Sm7");
 		context.drawImage(cardArt, 0, 0, canvas.width, canvas.height);
 
 		// Card rules background.
