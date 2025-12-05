@@ -1,5 +1,6 @@
 import ChronicleCard from "../../../model/chronicle/chronicle-card.js";
-import { ChronicleRune, ChronicleTenet } from "../../../model/chronicle/chronicle-enums.js";
+import DiscordEmbedDto from "../../../model/discord/discord-embed-dto.js";
+import ChronicleCardPainter from "../../../services/chronicle/chronicle-card-painter.js";
 import ChronicleCardService from "../../../services/chronicle/chronicle-card-service.js";
 import DiscordCommand from '../../discord-command.js';
 
@@ -10,12 +11,14 @@ import DiscordCommand from '../../discord-command.js';
 export default class ChronicleSearchCommand extends DiscordCommand
 {
 	private cardService: ChronicleCardService;
+	private cardPainter: ChronicleCardPainter;
 
-	constructor(cardService: ChronicleCardService)
+	constructor(cardService: ChronicleCardService, cardPainter: ChronicleCardPainter)
 	{
 		super();
 
 		this.cardService = cardService;
+		this.cardPainter = cardPainter;
 	}
 
 	/**
@@ -42,11 +45,20 @@ export default class ChronicleSearchCommand extends DiscordCommand
 		const result: ChronicleCard[] = await this.cardService.getCards(nameOption);
 		let reply: string = `${result.length} card(s) found:`;
 
-		result.forEach((card: ChronicleCard) =>
+		if (result.length != 1)
 		{
-			reply = `${reply}\n * ${ChronicleCard.getInfo(card)}`;
-		});
+			result.forEach((card: ChronicleCard) =>
+			{
+				reply = `${reply}\n * ${ChronicleCard.getInfo(card)}`;
+			});
 
-		await interaction.editReply(reply);
+			await interaction.editReply(reply);
+		}
+		else
+		{
+			const reply: DiscordEmbedDto = await this.cardPainter.buildCard(result[0], async status => { await interaction.editReply(status); });
+			await interaction.editReply({embeds: [reply.embed], files: [reply.attachment]});
+		}
+
 	}
 }

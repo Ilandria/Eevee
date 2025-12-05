@@ -12,7 +12,7 @@ export default function generateDiscordCommands(cardService: ChronicleCardServic
 {
 	const commands = [
 		new AhoyCommand(),
-		new ChronicleSearchCommand(cardService),
+		new ChronicleSearchCommand(cardService, cardPainter),
 		new ChronicleGenerateCardCommand(cardPainter)
 	];
 

@@ -51,10 +51,10 @@ export default class ChronicleCardPainter
 
 		// Card name.
 		context.font = `normal 900 80px Garamond`;
-		context.fillText(card.name, canvas.width / 2, 88.75, 900);
+		context.fillText(card.name, canvas.width / 2, 85, 900);
 
 		// Rune.
-		context.font = `normal 500 120px Garamond`;
+		context.font = `normal 600 120px Garamond`;
 		context.fillText(`${card.rune as ChronicleRune}`.at(0), 150, 150);
 
 		// Attack.
@@ -89,7 +89,7 @@ export default class ChronicleCardPainter
 		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
 
 		// Rules.
-		context.font = `50px Garamond`;
+		context.font = `40px Garamond`;
 		context.textAlign = "left";
 		for (let i: number = 0; i < lines.length; i++)
 		{
