@@ -100,20 +100,16 @@ export default class ChronicleCardPainter
 	{
 		context.textAlign = textAlign;
 		context.shadowColor = "black";
-		context.shadowBlur = 10;
+		context.shadowBlur = 20;
 		context.textBaseline = textBaseline;
 
-		context.font = `normal ${fontWeight * 1.05} ${fontSize * 1.05}px Garamond`;
+		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
 		context.fillStyle = "black";
 		context.fillText(text, x, y, maxWidth);
 
 		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
 		context.fillStyle = "white";
 		context.fillText(text, x, y, maxWidth);
-
-		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
-		context.fillStyle = "black";
-		context.strokeText(text, x, y, maxWidth);
 	}
 
 	// To do: Bring these methods into a string formatting utility class.
