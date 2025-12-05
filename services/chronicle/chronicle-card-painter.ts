@@ -62,26 +62,26 @@ export default class ChronicleCardPainter
 		if (card.cost) this.drawText(card.cost.toString(), context, 120, 150, canvas.height - 150, 300, "center", 600, "middle");
 
 		// Subtypes.
-		this.drawText(card.types.toUpperCase(), context, 40, canvas.width / 2, 155, 400, "center", 600, "middle");
+		this.drawText(card.types.toUpperCase(), context, 40, canvas.width / 2, 155, 600, "center", 400, "middle");
 
 		// Collection.
-		this.drawText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, context, 30, 337.5, canvas.height - 112.5, 300, "left", 225, "alphabetic");
+		this.drawText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, context, 30, 337.5, canvas.height - 112.5, 225, "left", 300, "alphabetic");
 
 		// Artist.
-		this.drawText(card.artist, context, 30, 337.5, canvas.height - 75, 300, "left", 225, "alphabetic");
+		this.drawText(card.artist, context, 30, 337.5, canvas.height - 75, 225, "left", 300, "alphabetic");
 
 		// Copyright.
-		this.drawText(`©${card.copyright}`, context, 30, canvas.width - 337.5, canvas.height - 112.5, 300, "right", 225, "alphabetic");
+		this.drawText(`©${card.copyright}`, context, 30, canvas.width - 337.5, canvas.height - 112.5, 225, "right", 300, "alphabetic");
 
 		// Creator.
-		this.drawText("Charlotte C. Brown", context, 30, canvas.width - 337.5, canvas.height - 75, 300, "right", 225, "alphabetic");
+		this.drawText("Charlotte C. Brown", context, 30, canvas.width - 337.5, canvas.height - 75, 225, "right", 300, "alphabetic");
 
 		// Rules.
 		context.font = `${ChronicleCardPainter.rulesFontSize}px Garamond`;
 		context.textAlign = "left";
 		for (let i: number = 0; i < lines.length; i++)
 		{
-			this.drawText(lines[i], context, ChronicleCardPainter.rulesFontSize, 300, canvas.height - (300 + ChronicleCardPainter.rulesLineSpacing * (lines.length - i - 1)), 300, "left", 900, "alphabetic");
+			this.drawText(lines[i], context, ChronicleCardPainter.rulesFontSize, 300, canvas.height - (300 + ChronicleCardPainter.rulesLineSpacing * (lines.length - i - 1)), 900, "left", 300, "alphabetic");
 		}
 
 		// Finalize card.
@@ -110,6 +110,10 @@ export default class ChronicleCardPainter
 		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
 		context.fillStyle = "white";
 		context.fillText(text, x, y, maxWidth);
+
+		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
+		context.fillStyle = "black";
+		context.strokeText(text, x, y, maxWidth);
 	}
 
 	// To do: Bring these methods into a string formatting utility class.
