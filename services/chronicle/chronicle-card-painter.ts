@@ -45,57 +45,43 @@ export default class ChronicleCardPainter
 
 		// General font setup.
 		statusCallback(`Scrawling rune words... ${coolAscii()}`);
-		context.fillStyle = "white";
-		context.textAlign = "center";
-		context.shadowColor = "black";
-		context.shadowBlur = 20;
-		context.textBaseline = "middle";
 
 		// Card name.
-		context.font = `normal 900 80px Garamond`;
-		context.fillText(card.name, canvas.width / 2, 85, 900);
+		this.drawText(card.name, context, 80, canvas.width / 2, 85, 900, "center", 900, "middle");
 
 		// Rune.
-		context.font = `normal 600 120px Garamond`;
-		context.fillText(`${ChronicleRune[card.rune]}`.at(0), 150, 150);
+		this.drawText(`${ChronicleRune[card.rune]}`.at(0), context, 120, 150, 150, 300, "center", 600, "middle");
 
 		// Attack.
-		if (card.attack) context.fillText(card.attack.toString(), canvas.width - 150, 150);
+		if (card.attack) this.drawText(card.attack.toString(), context, 120, canvas.width - 150, 150, 300, "center", 600, "middle");
 
 		// Defense.
-		if (card.defense) context.fillText(card.defense.toString(), canvas.width - 150, canvas.height - 150);
+		if (card.defense) this.drawText(card.defense.toString(), context, 120, canvas.width - 150, canvas.height - 150, 300, "center", 600, "middle");
 
 		// Cost.
-		context.fillText(card.cost.toString(), 150, canvas.height - 150);
+		if (card.cost) this.drawText(card.cost.toString(), context, 120, 150, canvas.height - 150, 300, "center", 600, "middle");
 
 		// Subtypes.
-		context.font = `normal 400 40px Garamond`;
-		context.fillText(card.types.toUpperCase(), canvas.width / 2, 155, 600);
-
-		// Card meta setup.
-		context.font = `30px Garamond`;
-		context.textBaseline = "alphabetic";
+		this.drawText(card.types.toUpperCase(), context, 40, canvas.width / 2, 155, 400, "center", 600, "middle");
 
 		// Collection.
-		context.textAlign = "left";
-		context.fillText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, 337.5, canvas.height - 112.5, 225);
+		this.drawText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, context, 30, 337.5, canvas.height - 112.5, 300, "left", 225, "alphabetic");
 
 		// Artist.
-		context.fillText(card.artist, 337.5, canvas.height - 75, 225);
+		this.drawText(card.artist, context, 30, 337.5, canvas.height - 75, 300, "left", 225, "alphabetic");
 
 		// Copyright.
-		context.textAlign = "right";
-		context.fillText(`©${card.copyright}`, canvas.width - 337.5, canvas.height - 112.5, 225);
+		this.drawText(`©${card.copyright}`, context, 30, canvas.width - 337.5, canvas.height - 112.5, 300, "right", 225, "alphabetic");
 
 		// Creator.
-		context.fillText("Charlotte Brown", canvas.width - 337.5, canvas.height - 75, 225);
+		this.drawText("Charlotte C. Brown", context, 30, canvas.width - 337.5, canvas.height - 75, 300, "right", 225, "alphabetic");
 
 		// Rules.
 		context.font = `${ChronicleCardPainter.rulesFontSize}px Garamond`;
 		context.textAlign = "left";
 		for (let i: number = 0; i < lines.length; i++)
 		{
-			context.fillText(lines[i], 300, canvas.height - (300 + ChronicleCardPainter.rulesLineSpacing * (lines.length - i - 1)), 900);
+			this.drawText(lines[i], context, ChronicleCardPainter.rulesFontSize, 300, canvas.height - (300 + ChronicleCardPainter.rulesLineSpacing * (lines.length - i - 1)), 300, "left", 900, "alphabetic");
 		}
 
 		// Finalize card.
@@ -108,6 +94,22 @@ export default class ChronicleCardPainter
 
 		statusCallback(`Here's your rune! ${coolAscii()}`);
 		return reply;
+	}
+
+	private drawText(text: string, context: CanvasRenderingContext2D, fontSize: number, x: number, y: number, maxWidth: number, textAlign: CanvasTextAlign = "left", fontWeight: number = 300, textBaseline: CanvasTextBaseline = "alphabetic")
+	{
+		context.textAlign = textAlign;
+		context.shadowColor = "black";
+		context.shadowBlur = 10;
+		context.textBaseline = textBaseline;
+
+		context.font = `normal ${fontWeight * 1.05} ${fontSize * 1.05}px Garamond`;
+		context.fillStyle = "black";
+		context.fillText(text, x, y, maxWidth);
+
+		context.font = `normal ${fontWeight} ${fontSize}px Garamond`;
+		context.fillStyle = "white";
+		context.fillText(text, x, y, maxWidth);
 	}
 
 	// To do: Bring these methods into a string formatting utility class.
