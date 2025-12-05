@@ -65,7 +65,7 @@ export default class ChronicleCardPainter
 		this.drawText(card.types.toUpperCase(), context, 40, canvas.width / 2, 155, 600, "center", 400, "middle");
 
 		// Collection.
-		this.drawText(`${(card.rarity as ChronicleRarity).toString().at(0)} ${card.setCode} ${card.setNumber}`, context, 30, 337.5, canvas.height - 112.5, 225, "left", 300, "alphabetic");
+		this.drawText(`${ChronicleRarity[card.rarity].toString().at(0)} ${card.setCode} ${card.setNumber}`, context, 30, 337.5, canvas.height - 112.5, 225, "left", 300, "alphabetic");
 
 		// Artist.
 		this.drawText(card.artist, context, 30, 337.5, canvas.height - 75, 225, "left", 300, "alphabetic");
